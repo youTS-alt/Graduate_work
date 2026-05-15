@@ -1,4 +1,4 @@
-<img width="2762" height="3515" alt="20260219_182916 (1)" src="https://github.com/user-attachments/assets/ea7fe3ce-e492-45fc-995d-ad27583ed58a" /><img width="2762" height="3515" alt="20260219_182916 (1)" src="https://github.com/user-attachments/assets/d9036e93-3f24-4d69-9039-c2ca2c415039" /><img width="2762" height="3515" alt="20260219_182916 (1)" src="https://github.com/user-attachments/assets/eb78e859-0a81-4d81-8b94-f6dd8c5e0c21" /># Graduate_work // Веб-система управления взаимоотношениями с клиентами гостиницы на базе технологии ИИ-агентов
+# Graduate_work // Веб-система управления взаимоотношениями с клиентами гостиницы на базе технологии ИИ-агентов
 
 # Описание
 
@@ -11,5 +11,15 @@
 1. `Git` для клонирования проекта.
 2. `Python 3.11+`.
 3. `VS Code`.
-4. Расширения `Python` и `Pylance` в `VS Code`.
+4. Расширения `Python` и `Pylance` в `VS Code`, скриншоты ниже
+<img width="395" height="377" alt="Расширения `Python` и `Pylance` " src="https://github.com/user-attachments/assets/da0422ec-c052-416c-aa4c-680013cb9b9d" />
+
 5. `Ollama`, потому что AI-чат проекта ходит в локальный API `http://localhost:11434/api/chat`.
+<img width="390" height="148" alt="image" src="https://github.com/user-attachments/assets/15a33662-896d-45f6-a7fc-8bb7b3cf914a" />
+
+# Установка
+1. Запустите `VS Code`.
+2. Выберите `File -> Open Folder`.
+3. Откройте папку проекта `HotelMate_AI_CRM`.
+4. Откройте встроенный терминал: `Terminal -> New Terminal`.
+
