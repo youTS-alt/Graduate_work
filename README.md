@@ -22,4 +22,35 @@
 2. Выберите `File -> Open Folder`.
 3. Откройте папку проекта `HotelMate_AI_CRM`.
 4. Откройте встроенный терминал: `Terminal -> New Terminal`.
+5. В терминале `VS Code` поочередно выполните: 
+```
+python -m venv .venv 
+.venv\Scripts\Activate.ps1
+```
+*При успешном выполнении у вас появится скобка зеленого цвета (.venv) в начале строки ввода в терминал*
 
+6. Установите зависимости проекта, выполнив команды поочередно:
+```
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+*В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.*
+
+7. Установите Ollama, для этого:
+- Перейдите на сайт `https://ollama.com/download`.
+- Скачайте версию для Windows.
+<img width="1836" height="655" alt="image" src="https://github.com/user-attachments/assets/37a8621e-aaef-4e26-8fbc-ed61e1cd0d1d" />
+
+- Установите Ollama обычным установщиком.
+- После установки откройте новое окно терминала `PowerShell` и проверьте команду:
+```
+ollama --version
+```
+
+8. Скачайте модель для Ollama в терминале `PowerShell`
+Проект сейчас ожидает модель *llama3.1:8b*, скачайте ее командой:
+```
+ollama pull llama3.1:8b
+```
+<img width="859" height="266" alt="Screenshot_9" src="https://github.com/user-attachments/assets/f4c4d087-387a-4ea1-a4d6-a602eec8892d" />
