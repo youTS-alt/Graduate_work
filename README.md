@@ -51,18 +51,24 @@
 
 **5. В терминале `VS Code`** поочередно выполните: 
 ```
-python -m venv .venv 
+python -m venv .venv
+```
+
+```
 .venv\Scripts\Activate.ps1
 ```
-*При успешном выполнении у вас появится скобка зеленого цвета (.venv) в начале строки ввода в терминал*
+При успешном выполнении у вас появится скобка зеленого цвета (.venv) в начале строки ввода в терминал
 
 **6. Установите зависимости проекта,** выполнив команды поочередно:
 ```
 python -m pip install --upgrade pip
+```
+
+```
 pip install -r requirements.txt
 ```
 
-*В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.*
+В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.
 
 **7. Установите Ollama,** для этого:
 - Перейдите на сайт *https://ollama.com/download*.
@@ -103,6 +109,9 @@ Invoke-RestMethod -Method Get -Uri http://localhost:11434/api/tags
 
 ```
 python manage.py migrate
+```
+
+```
 python manage.py seed_data
 ```
 
