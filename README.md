@@ -147,3 +147,8 @@ python manage.py runserver
 
 - `OLLAMA_URL = "http://localhost:11434/api/chat"`
 - `OLLAMA_MODEL = "llama3.1:8b"`
+
+
+## Важная информация
+
+Если у вас на устройстве включен VPN, то Ollama не будет работать.
