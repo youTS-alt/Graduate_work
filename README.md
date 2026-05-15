@@ -41,18 +41,22 @@
 <img width="390" height="148" alt="image" src="https://github.com/user-attachments/assets/15a33662-896d-45f6-a7fc-8bb7b3cf914a" />
 
 # Установка
-1. Запустите `VS Code`.
-2. Выберите `File -> Open Folder`.
-3. Откройте папку проекта `HotelMate_AI_CRM`.
-4. Откройте встроенный терминал: `Terminal -> New Terminal`.
-5. В терминале `VS Code` поочередно выполните: 
+**1. Запустите `VS Code`.**
+
+**2. Выберите `File -> Open Folder`.**
+
+**3. Откройте папку проекта `HotelMate_AI_CRM`.**
+
+**4. Откройте встроенный терминал: `Terminal -> New Terminal`.**
+
+**5. В терминале `VS Code`** поочередно выполните: 
 ```
 python -m venv .venv 
 .venv\Scripts\Activate.ps1
 ```
 *При успешном выполнении у вас появится скобка зеленого цвета (.venv) в начале строки ввода в терминал*
 
-6. Установите зависимости проекта, выполнив команды поочередно:
+**6. Установите зависимости проекта,** выполнив команды поочередно:
 ```
 python -m pip install --upgrade pip
 pip install -r requirements.txt
@@ -60,8 +64,8 @@ pip install -r requirements.txt
 
 *В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.*
 
-7. Установите Ollama, для этого:
-- Перейдите на сайт `https://ollama.com/download`.
+**7. Установите Ollama,** для этого:
+- Перейдите на сайт *https://ollama.com/download*.
 - Скачайте версию для Windows.
 <img width="1836" height="655" alt="image" src="https://github.com/user-attachments/assets/37a8621e-aaef-4e26-8fbc-ed61e1cd0d1d" />
 
@@ -71,9 +75,47 @@ pip install -r requirements.txt
 ollama --version
 ```
 
-8. Скачайте модель для Ollama в терминале `PowerShell`
+**8. Скачайте модель для Ollama** в терминале `PowerShell`
 Проект сейчас ожидает модель *llama3.1:8b*, скачайте ее командой:
 ```
 ollama pull llama3.1:8b
 ```
 <img width="859" height="266" alt="Screenshot_9" src="https://github.com/user-attachments/assets/f4c4d087-387a-4ea1-a4d6-a602eec8892d" />
+
+**9. Запустить Ollama.** Обычно на Windows Ollama стартует как приложение и поднимает локальный сервер автоматически. Проверить можно так, выполнив команду в `PowerShell:
+
+```
+ollama list
+```
+<img width="857" height="180" alt="Screenshot_10" src="https://github.com/user-attachments/assets/8fa7f4c7-4070-4ac0-a630-baff1b2af373" />
+
+Если нужно вручную проверить API:
+
+```
+Invoke-RestMethod -Method Get -Uri http://localhost:11434/api/tags
+```
+
+<img width="876" height="233" alt="image" src="https://github.com/user-attachments/assets/de910025-698c-41f2-b5f3-230b2a6952e1" />
+
+**10. Подготовить базу данных.** В репозитории уже есть файл `db.sqlite3`, поэтому для быстрого старта можно просто запускать проект.
+
+- Если хотите развернуть базу заново, выполните поочередно команды в терминале `VS Code`:
+
+```
+python manage.py migrate
+python manage.py seed_data
+```
+
+- Если нужно пересоздать демо-данные с очисткой:
+
+```
+python manage.py seed_data --reset
+```
+
+**11. Запустить Django-сервер.** Для этого выполните команду в терминале `VS Code`:
+
+```
+python manage.py runserver
+```
+
+После запуска откройте в браузере *http://127.0.0.1:8000/*
