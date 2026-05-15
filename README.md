@@ -154,7 +154,7 @@ python manage.py runserver
 2. Установились ли зависимости через `pip install -r requirements.txt`.
 3. Запущена ли `Ollama`.
 4. Скачана ли модель `llama3.1:8b`.
-5. Доступен ли адрес `http://localhost:11434`.
+5. Доступен ли адрес *http://localhost:11434*.
 
 В проекте запрос к Ollama зашит в [ui/agent.py](C:/Users/Ary/PycharmProjects/HotelMate_AI_CRM/ui/agent.py):
 
