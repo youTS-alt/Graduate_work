@@ -90,7 +90,8 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-<img width="862" height="262" alt="image" src="https://github.com/user-attachments/assets/bb1ab705-1fa3-4111-9fd8-5cc040434b93" />
+<img width="869" height="450" alt="image" src="https://github.com/user-attachments/assets/398c2ab3-3f76-419c-93df-03b11a9487bc" />
+
 
 В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.
 
@@ -105,7 +106,8 @@ pip install -r requirements.txt
 ollama --version
 ```
 
-![Uploading image.png…]()
+<img width="591" height="171" alt="image" src="https://github.com/user-attachments/assets/e50c2069-654b-4457-b45b-d90dd4c96d29" />
+
 
 
 **8. Скачайте модель для Ollama** в старм терминале `PowerShell`
@@ -113,7 +115,8 @@ ollama --version
 ```
 ollama pull llama3.1:8b
 ```
-![Uploading image.png…]()
+<img width="869" height="267" alt="image" src="https://github.com/user-attachments/assets/456d2930-27d3-4e48-a986-8dea06f88e95" />
+
 
 
 **9. Запустить Ollama.** Обычно на Windows Ollama стартует как приложение и поднимает локальный сервер автоматически. Проверить можно так, выполнив команду в `PowerShell:
@@ -127,13 +130,12 @@ ollama list
 ```
 Invoke-RestMethod -Method Get -Uri http://localhost:11434/api/tags
 ```
-
-![Uploading image.png…]()
+<img width="862" height="261" alt="image" src="https://github.com/user-attachments/assets/18e7678c-2587-455f-aae8-34f35b84d25d" />
 
 
 **10. Подготовить базу данных.** В репозитории уже есть файл `db.sqlite3`, поэтому для быстрого старта можно просто запускать проект.
 
-- Если хотите развернуть базу заново, выполните поочередно команды в терминале `VS Code`:
+- Если хотите развернуть базу заново, выполните поочередно команды в терминале `PowerShell`:
 
 ```
 python manage.py migrate
@@ -149,13 +151,16 @@ python manage.py seed_data
 python manage.py seed_data --reset
 ```
 
-**11. Запустить Django-сервер.** Для этого выполните команду в терминале `VS Code`:
+**11. Запустить Django-сервер.** Для этого выполните команду в терминале `PowerShell`:
 
 ```
 python manage.py runserver
 ```
 
+
 После запуска откройте в браузере *http://127.0.0.1:8000/*
+
+
 
 Основные страницы:
 
