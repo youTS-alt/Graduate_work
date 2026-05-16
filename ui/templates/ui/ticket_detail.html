@@ -1,0 +1,108 @@
+{% extends 'ui/base.html' %}
+{% load translate %}
+
+{% block content %}
+<section class="detail-layout">
+    <div class="detail-main card">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Обращение #{{ ticket.id }}</p>
+                <h3>{{ ticket.subject }}</h3>
+                <p>{{ ticket.client }} · {% if ticket.booking %}Бронирование #{{ ticket.booking.id }}{% else %}—{% endif %}</p>
+            </div>
+            <div class="button-row">
+                <span class="badge status-ticket-{{ ticket.status|slugify }}">{{ ticket.status|ticket_status }}</span>
+                <a class="btn btn-secondary" href="{% url 'ui:crud_update' 'tickets' ticket.pk %}">Редактировать</a>
+                <a class="btn btn-primary" href="{% url 'ui:crud_create' 'tasks' %}">Создать задачу</a>
+            </div>
+        </div>
+
+        <div class="tabs" data-tabs>
+            <div class="tab-buttons">
+                <button class="tab-button active" type="button" data-tab-target="messages">История сообщений</button>
+                <button class="tab-button" type="button" data-tab-target="tasks">Задачи</button>
+                <button class="tab-button" type="button" data-tab-target="form">Панель обработки</button>
+            </div>
+            <div class="tab-panel active" data-tab-panel="messages">
+                <div class="chat-feed">
+                    {% for message in messages %}
+                        <div class="message-bubble message-{{ message.direction }}">
+                            <strong>
+                                {% if message.direction == 'inbound' %}Входящее{% else %}Исходящее{% endif %}
+                                · {{ message.channel }}
+                            </strong>
+                            <span>{{ message.created_at|date:"d.m.Y H:i" }}</span>
+                            <p>{{ message.text }}</p>
+                        </div>
+                    {% empty %}
+                        <p class="empty-state">Сообщения отсутствуют.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-panel" data-tab-panel="tasks">
+                <div class="stack-list">
+                    {% for task in ticket_tasks %}
+                        <div class="list-row">
+                            <div>
+                                <strong>{{ task.type }}</strong>
+                                <p>
+                                    {% if task.department %}{{ task.department }}{% endif %}
+                                    {% if task.assignee %}· {{ task.assignee }}{% endif %}
+                                    {% if task.due %}· срок: {{ task.due|date:"d.m.Y H:i" }}{% endif %}
+                                </p>
+                                {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+                            </div>
+                            <span class="badge status-task-{{ task.status|slugify }}">{{ task.status|task_status }}</span>
+                        </div>
+                    {% empty %}
+                        <p class="empty-state">Задачи по обращению отсутствуют.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-panel" data-tab-panel="form">
+                <div class="form-grid">
+                    <p class="eyebrow">Добавить сообщение через общую форму</p>
+                    <a class="btn btn-primary" href="{% url 'ui:crud_create' 'messages' %}">Создать сообщение</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="concierge-panel card">
+        <div class="section-head sticky-head">
+            <div>
+                <p class="eyebrow">Консьерж</p>
+                <h3>ИИ‑помощник</h3>
+            </div>
+            <span class="badge badge-warn">Требуется контроль</span>
+        </div>
+        <div class="concierge-scroll">
+            <div class="info-card soft-accent">
+                <p class="eyebrow">Краткая сводка</p>
+                <strong>{{ concierge_panels.summary }}</strong>
+            </div>
+            <div class="info-card">
+                <p class="eyebrow">Рекомендуемый ответ</p>
+                <p>{{ concierge_panels.reply }}</p>
+            </div>
+            <div class="info-card">
+                <p class="eyebrow">Рекомендации услуг</p>
+                <ul class="plain-list">
+                    {% for service in concierge_panels.services %}
+                        <li>{{ service }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="info-card danger-soft">
+                <p class="eyebrow">Критические действия</p>
+                <strong>Действие требует подтверждения</strong>
+                <ul class="plain-list">
+                    {% for action in concierge_panels.actions %}
+                        <li>{{ action }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </aside>
+</section>
+{% endblock %}

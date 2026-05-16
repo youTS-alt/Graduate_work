@@ -1,0 +1,2336 @@
+{
+  "ui_agentprofile": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.031951",
+      "updated_at": "2026-03-23 18:22:27.031951",
+      "type": "communications",
+      "role": "Поддержка гостя",
+      "model": "gpt-5.2",
+      "description": "Классификация обращений и подготовка ответов.",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.031951",
+      "updated_at": "2026-03-23 18:22:27.031951",
+      "type": "recommendations",
+      "role": "Рекомендации",
+      "model": "gpt-5.2",
+      "description": "Подбор услуг и предложений под предпочтения клиента.",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.032951",
+      "updated_at": "2026-03-23 18:22:27.032951",
+      "type": "ops",
+      "role": "Операции",
+      "model": "gpt-5.2",
+      "description": "Сценарии для задач и операций отеля.",
+      "active": 1
+    }
+  ],
+  "ui_campaign": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.028946",
+      "updated_at": "2026-03-23 18:22:27.028946",
+      "name": "Весенние выходные у моря",
+      "segment": "{\"segment\": [\"VIP\", \"Loyalty\"], \"interests\": [\"spa\", \"sea_view\"]}",
+      "started_at": "2026-03-09 18:22:26.958476",
+      "finished_at": null,
+      "metrics": "{\"sent\": 480, \"opened\": 212, \"clicked\": 58}",
+      "status": "running"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.028946",
+      "updated_at": "2026-03-23 18:22:27.028946",
+      "name": "Бизнес-обновления",
+      "segment": "{\"segment\": [\"Business\"], \"channels\": [\"email\"]}",
+      "started_at": "2026-02-21 18:22:26.958476",
+      "finished_at": "2026-03-16 18:22:26.958476",
+      "metrics": "{\"sent\": 320, \"opened\": 180, \"clicked\": 41}",
+      "status": "finished"
+    }
+  ],
+  "ui_client": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.998902",
+      "updated_at": "2026-03-23 18:22:26.998902",
+      "last_name": "Смирнова",
+      "first_name": "Анна",
+      "middle_name": "Игоревна",
+      "birth_date": "1988-11-02",
+      "segment": "VIP",
+      "preferences": "{\"pillow\": \"firm\", \"view\": \"sea\", \"late_checkout\": true, \"allergies\": [\"nuts\"]}",
+      "notes": "Предпочитает верхние этажи; чувствительна к шуму."
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.998902",
+      "updated_at": "2026-03-23 18:22:26.998902",
+      "last_name": "Петров",
+      "first_name": "Илья",
+      "middle_name": "Сергеевич",
+      "birth_date": "1991-04-15",
+      "segment": "Business",
+      "preferences": "{\"quiet_room\": true, \"needs_invoice\": true, \"breakfast\": true}",
+      "notes": "Частые командировки; нужны закрывающие документы."
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.998902",
+      "updated_at": "2026-03-23 18:22:26.998902",
+      "last_name": "Ким",
+      "first_name": "Мария",
+      "middle_name": "Владимировна",
+      "birth_date": "1985-07-28",
+      "segment": "Family",
+      "preferences": "{\"extra_bed\": \"crib\", \"room_near_elevator\": false}",
+      "notes": "Путешествует с ребёнком; просит детскую кроватку."
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.999901",
+      "updated_at": "2026-03-23 18:22:26.999901",
+      "last_name": "Васильев",
+      "first_name": "Олег",
+      "middle_name": "Павлович",
+      "birth_date": "1994-02-09",
+      "segment": "Leisure",
+      "preferences": "{\"excursions\": true, \"seafood\": true}",
+      "notes": "Интересуется экскурсиями и локальными ресторанами."
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.999901",
+      "updated_at": "2026-03-23 18:22:26.999901",
+      "last_name": "Орлова",
+      "first_name": "Елена",
+      "middle_name": "Андреевна",
+      "birth_date": "1979-12-04",
+      "segment": "Loyalty",
+      "preferences": "{\"view\": \"sea\", \"parking\": true, \"arrival_time\": \"late\"}",
+      "notes": "Часто приезжает поздно вечером; предпочитает парковку."
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:22:26.999901",
+      "updated_at": "2026-03-23 18:22:26.999901",
+      "last_name": "Новикова",
+      "first_name": "Светлана",
+      "middle_name": "Романовна",
+      "birth_date": "1996-09-17",
+      "segment": "New",
+      "preferences": "{\"spa\": true, \"breakfast\": true}",
+      "notes": "Новый клиент; интересуется спа-программами."
+    }
+  ],
+  "ui_department": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.978975",
+      "updated_at": "2026-03-23 18:22:26.978975",
+      "name": "Front Office"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.980071",
+      "updated_at": "2026-03-23 18:22:26.980071",
+      "name": "Concierge"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.980071",
+      "updated_at": "2026-03-23 18:22:26.980071",
+      "name": "Finance"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.980574",
+      "updated_at": "2026-03-23 18:22:26.980574",
+      "name": "Housekeeping"
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.980574",
+      "updated_at": "2026-03-23 18:22:26.980574",
+      "name": "IT Operations"
+    }
+  ],
+  "ui_messagetemplate": [
+    {
+      "id": 1,
+      "code": "ticket_ack_email",
+      "channel": "email",
+      "subject": "Мы получили ваше обращение",
+      "body": "Здравствуйте!\n\nМы получили обращение и уже начали работу.\n\nС уважением,\nСлужба поддержки",
+      "active": 1,
+      "updated_at": "2026-03-23 18:22:27.027940"
+    },
+    {
+      "id": 2,
+      "code": "late_checkout_offer",
+      "channel": "whatsapp",
+      "subject": "",
+      "body": "Можем предложить поздний выезд до 18:00 при наличии возможности. Подтвердить?",
+      "active": 1,
+      "updated_at": "2026-03-23 18:22:27.027940"
+    },
+    {
+      "id": 3,
+      "code": "invoice_ready",
+      "channel": "email",
+      "subject": "Документы готовы",
+      "body": "Добрый день!\n\nЗакрывающие документы подготовлены. При необходимости отправим оригиналы курьером.",
+      "active": 1,
+      "updated_at": "2026-03-23 18:22:27.027940"
+    },
+    {
+      "id": 4,
+      "code": "spa_offer",
+      "channel": "telegram",
+      "subject": "",
+      "body": "Доступна запись в спа-зону на удобное время. Хотите подобрать слот?",
+      "active": 1,
+      "updated_at": "2026-03-23 18:22:27.028946"
+    }
+  ],
+  "ui_permission": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.984179",
+      "updated_at": "2026-03-23 18:22:26.984179",
+      "code": "clients.read",
+      "description": "Просмотр клиентов."
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.984179",
+      "updated_at": "2026-03-23 18:22:26.984179",
+      "code": "clients.write",
+      "description": "Редактирование клиентов."
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.984691",
+      "updated_at": "2026-03-23 18:22:26.984691",
+      "code": "bookings.read",
+      "description": "Просмотр бронирований."
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.984691",
+      "updated_at": "2026-03-23 18:22:26.984691",
+      "code": "bookings.write",
+      "description": "Редактирование бронирований."
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.985204",
+      "updated_at": "2026-03-23 18:22:26.985204",
+      "code": "bookings.cancel",
+      "description": "Отмена бронирований."
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:22:26.985204",
+      "updated_at": "2026-03-23 18:22:26.985204",
+      "code": "payments.read",
+      "description": "Просмотр платежей."
+    },
+    {
+      "id": 7,
+      "created_at": "2026-03-23 18:22:26.985717",
+      "updated_at": "2026-03-23 18:22:26.985717",
+      "code": "payments.write",
+      "description": "Проведение платежей."
+    },
+    {
+      "id": 8,
+      "created_at": "2026-03-23 18:22:26.985717",
+      "updated_at": "2026-03-23 18:22:26.985717",
+      "code": "tickets.read",
+      "description": "Просмотр обращений."
+    },
+    {
+      "id": 9,
+      "created_at": "2026-03-23 18:22:26.986230",
+      "updated_at": "2026-03-23 18:22:26.986230",
+      "code": "tickets.write",
+      "description": "Работа с обращениями."
+    },
+    {
+      "id": 10,
+      "created_at": "2026-03-23 18:22:26.986230",
+      "updated_at": "2026-03-23 18:22:26.986230",
+      "code": "tasks.manage",
+      "description": "Управление задачами."
+    },
+    {
+      "id": 11,
+      "created_at": "2026-03-23 18:22:26.986743",
+      "updated_at": "2026-03-23 18:22:26.986743",
+      "code": "catalog.manage",
+      "description": "Справочники."
+    },
+    {
+      "id": 12,
+      "created_at": "2026-03-23 18:22:26.986743",
+      "updated_at": "2026-03-23 18:22:26.986743",
+      "code": "ai.run",
+      "description": "Запуск агентных сессий."
+    },
+    {
+      "id": 13,
+      "created_at": "2026-03-23 18:22:26.987257",
+      "updated_at": "2026-03-23 18:22:26.987257",
+      "code": "audit.read",
+      "description": "Просмотр аудита."
+    }
+  ],
+  "ui_rate": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.971863",
+      "updated_at": "2026-03-23 18:22:26.971863",
+      "name": "Flexible",
+      "meal_plan": "BB",
+      "rules": "{\"check_in\": \"14:00\", \"check_out\": \"12:00\", \"currency\": \"RUB\"}",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.971863",
+      "updated_at": "2026-03-23 18:22:26.971863",
+      "name": "Non-Refundable",
+      "meal_plan": "BB",
+      "rules": "{\"prepayment\": 100, \"change_allowed\": false, \"currency\": \"RUB\"}",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.972377",
+      "updated_at": "2026-03-23 18:22:26.972377",
+      "name": "Corporate",
+      "meal_plan": "RO",
+      "rules": "{\"invoice\": true, \"guarantee\": \"company\", \"currency\": \"RUB\"}",
+      "active": 1
+    }
+  ],
+  "ui_role": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.982640",
+      "updated_at": "2026-03-23 18:22:26.982640",
+      "code": "admin",
+      "description": "Полный доступ."
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.983153",
+      "updated_at": "2026-03-23 18:22:26.983153",
+      "code": "front_office",
+      "description": "Бронирования и обращения."
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.983153",
+      "updated_at": "2026-03-23 18:22:26.983153",
+      "code": "finance",
+      "description": "Платежи и сверки."
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.983666",
+      "updated_at": "2026-03-23 18:22:26.983666",
+      "code": "ops",
+      "description": "Операционные задачи."
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.983666",
+      "updated_at": "2026-03-23 18:22:26.983666",
+      "code": "ai_agent",
+      "description": "Агентные сценарии."
+    }
+  ],
+  "ui_roomcategory": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.965636",
+      "updated_at": "2026-03-23 18:22:26.965636",
+      "name": "Standard",
+      "capacity": 2,
+      "description": "Уютный номер для коротких поездок.",
+      "options": "{\"beds\": \"queen\", \"view\": \"city\", \"area_m2\": 18}"
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.967686",
+      "updated_at": "2026-03-23 18:22:26.967686",
+      "name": "Superior",
+      "capacity": 2,
+      "description": "Расширенный номер с рабочей зоной.",
+      "options": "{\"beds\": \"king\", \"workdesk\": true, \"area_m2\": 24}"
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.968763",
+      "updated_at": "2026-03-23 18:22:26.968763",
+      "name": "Deluxe Sea View",
+      "capacity": 3,
+      "description": "Номер с видом на море и балконом.",
+      "options": "{\"beds\": \"king+sofa\", \"view\": \"sea\", \"balcony\": true}"
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.969286",
+      "updated_at": "2026-03-23 18:22:26.969286",
+      "name": "Family Suite",
+      "capacity": 4,
+      "description": "Двухкомнатный номер для семьи.",
+      "options": "{\"beds\": \"2 queen\", \"kitchenette\": true, \"area_m2\": 44}"
+    }
+  ],
+  "ui_service": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.974429",
+      "updated_at": "2026-03-23 18:22:26.974429",
+      "name": "Airport transfer",
+      "price": 2500,
+      "description": "Встреча и трансфер до отеля.",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.974945",
+      "updated_at": "2026-03-23 18:22:26.974945",
+      "name": "Late checkout",
+      "price": 1800,
+      "description": "Выезд до 18:00 при наличии возможности.",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.974945",
+      "updated_at": "2026-03-23 18:22:26.974945",
+      "name": "Breakfast",
+      "price": 900,
+      "description": "Завтрак шведский стол.",
+      "active": 1
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.975460",
+      "updated_at": "2026-03-23 18:22:26.975460",
+      "name": "Parking",
+      "price": 600,
+      "description": "Охраняемая парковка на сутки.",
+      "active": 1
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.975460",
+      "updated_at": "2026-03-23 18:22:26.975460",
+      "name": "Spa access",
+      "price": 1500,
+      "description": "Посещение спа-зоны на 2 часа.",
+      "active": 1
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:47:21.892102",
+      "updated_at": "2026-03-23 18:47:21.892102",
+      "name": "Consultation",
+      "price": 1000,
+      "description": "Description",
+      "active": 1
+    }
+  ],
+  "ui_agentpolicy": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.032951",
+      "updated_at": "2026-03-23 18:22:27.032951",
+      "rule": "Компенсации свыше 5000 ₽ требуют подтверждения.",
+      "parameters": "{\"threshold_rub\": 5000}",
+      "requires_approval": 1,
+      "agent_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.033951",
+      "updated_at": "2026-03-23 18:22:27.033951",
+      "rule": "Рекомендации учитывать сегмент и историю услуг.",
+      "parameters": "{\"use_loyalty\": true}",
+      "requires_approval": 0,
+      "agent_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.033951",
+      "updated_at": "2026-03-23 18:22:27.033951",
+      "rule": "Операционные изменения фиксировать в аудите.",
+      "parameters": "{\"audit_required\": true}",
+      "requires_approval": 0,
+      "agent_id": 3
+    }
+  ],
+  "ui_agentsession": [
+    {
+      "id": 1,
+      "started_at": "2026-03-23 18:24:27.023437",
+      "finished_at": "2026-03-23 18:27:27.023437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 1,
+      "message_id": 1,
+      "ticket_id": 1
+    },
+    {
+      "id": 2,
+      "started_at": "2026-03-23 18:24:27.024437",
+      "finished_at": "2026-03-23 18:27:27.024437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 1,
+      "message_id": 2,
+      "ticket_id": 1
+    },
+    {
+      "id": 3,
+      "started_at": "2026-03-23 18:24:27.024437",
+      "finished_at": "2026-03-23 18:27:27.024437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 2,
+      "message_id": 3,
+      "ticket_id": 2
+    },
+    {
+      "id": 4,
+      "started_at": "2026-03-23 18:24:27.025437",
+      "finished_at": "2026-03-23 18:27:27.025437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 2,
+      "message_id": 4,
+      "ticket_id": 2
+    },
+    {
+      "id": 5,
+      "started_at": "2026-03-23 18:24:27.025437",
+      "finished_at": "2026-03-23 18:27:27.025437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 3,
+      "message_id": 5,
+      "ticket_id": 3
+    },
+    {
+      "id": 6,
+      "started_at": "2026-03-23 18:24:27.025437",
+      "finished_at": "2026-03-23 18:27:27.025437",
+      "status": "done",
+      "agent_id": 1,
+      "client_id": 3,
+      "message_id": 6,
+      "ticket_id": 3
+    }
+  ],
+  "ui_agentmemory": [
+    {
+      "id": 1,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.040464",
+      "updated_at": "2026-03-23 18:22:27.040464",
+      "session_id": 1
+    },
+    {
+      "id": 2,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.040464",
+      "updated_at": "2026-03-23 18:22:27.040464",
+      "session_id": 1
+    },
+    {
+      "id": 3,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.041465",
+      "updated_at": "2026-03-23 18:22:27.041465",
+      "session_id": 2
+    },
+    {
+      "id": 4,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.041465",
+      "updated_at": "2026-03-23 18:22:27.041465",
+      "session_id": 2
+    },
+    {
+      "id": 5,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.041465",
+      "updated_at": "2026-03-23 18:22:27.041465",
+      "session_id": 3
+    },
+    {
+      "id": 6,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.042464",
+      "updated_at": "2026-03-23 18:22:27.042464",
+      "session_id": 3
+    },
+    {
+      "id": 7,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.042464",
+      "updated_at": "2026-03-23 18:22:27.042464",
+      "session_id": 4
+    },
+    {
+      "id": 8,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.042464",
+      "updated_at": "2026-03-23 18:22:27.042464",
+      "session_id": 4
+    },
+    {
+      "id": 9,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.042464",
+      "updated_at": "2026-03-23 18:22:27.042464",
+      "session_id": 5
+    },
+    {
+      "id": 10,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.043463",
+      "updated_at": "2026-03-23 18:22:27.043463",
+      "session_id": 5
+    },
+    {
+      "id": 11,
+      "type": "summary",
+      "data": "Краткая выжимка контекста обращения и текущего статуса обработки.",
+      "created_at": "2026-03-23 18:22:27.043463",
+      "updated_at": "2026-03-23 18:22:27.043463",
+      "session_id": 6
+    },
+    {
+      "id": 12,
+      "type": "facts",
+      "data": "Предпочтения клиента и важные ограничения по обслуживанию.",
+      "created_at": "2026-03-23 18:22:27.043463",
+      "updated_at": "2026-03-23 18:22:27.043463",
+      "session_id": 6
+    }
+  ],
+  "ui_agentactionlog": [
+    {
+      "id": 1,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 1, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.036950",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 1,
+      "booking_id": 1,
+      "task_id": null,
+      "ticket_id": 1
+    },
+    {
+      "id": 2,
+      "tool": "recommend_service",
+      "arguments": "{\"service\": \"Late checkout\"}",
+      "result": "{\"recommended\": \"Late checkout\", \"price_rub\": 1800}",
+      "risk": "medium",
+      "created_at": "2026-03-23 18:22:27.037951",
+      "approval_level": "manager",
+      "agent_id": 2,
+      "session_id": 1,
+      "booking_id": 1,
+      "task_id": null,
+      "ticket_id": 1
+    },
+    {
+      "id": 3,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 1, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.038455",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 2,
+      "booking_id": 1,
+      "task_id": null,
+      "ticket_id": 1
+    },
+    {
+      "id": 4,
+      "tool": "recommend_service",
+      "arguments": "{\"service\": \"Late checkout\"}",
+      "result": "{\"recommended\": \"Late checkout\", \"price_rub\": 1800}",
+      "risk": "medium",
+      "created_at": "2026-03-23 18:22:27.038455",
+      "approval_level": "manager",
+      "agent_id": 2,
+      "session_id": 2,
+      "booking_id": 1,
+      "task_id": null,
+      "ticket_id": 1
+    },
+    {
+      "id": 5,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 2, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.038455",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 3,
+      "booking_id": 2,
+      "task_id": null,
+      "ticket_id": 2
+    },
+    {
+      "id": 6,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 2, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.039460",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 4,
+      "booking_id": 2,
+      "task_id": null,
+      "ticket_id": 2
+    },
+    {
+      "id": 7,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 3, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.039460",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 5,
+      "booking_id": 3,
+      "task_id": null,
+      "ticket_id": 3
+    },
+    {
+      "id": 8,
+      "tool": "draft_reply",
+      "arguments": "{\"ticket_id\": 3, \"language\": \"ru\"}",
+      "result": "{\"summary\": \"\\u041f\\u043e\\u0434\\u0433\\u043e\\u0442\\u043e\\u0432\\u043b\\u0435\\u043d \\u043e\\u0442\\u0432\\u0435\\u0442 \\u0438 \\u0443\\u0442\\u043e\\u0447\\u043d\\u044f\\u044e\\u0449\\u0438\\u0435 \\u0432\\u043e\\u043f\\u0440\\u043e\\u0441\\u044b.\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.040464",
+      "approval_level": "none",
+      "agent_id": 1,
+      "session_id": 6,
+      "booking_id": 3,
+      "task_id": null,
+      "ticket_id": 3
+    }
+  ],
+  "ui_bookingguest": [
+    {
+      "id": 1,
+      "full_name": "Ким Мария Владимировна",
+      "role": "primary",
+      "document": "Паспорт РФ",
+      "created_at": "2026-03-23 18:22:27.013418",
+      "booking_id": 3
+    },
+    {
+      "id": 2,
+      "full_name": "Ким Артём",
+      "role": "child",
+      "document": "",
+      "created_at": "2026-03-23 18:22:27.013418",
+      "booking_id": 3
+    }
+  ],
+  "ui_bookingcancellation": [
+    {
+      "id": 1,
+      "reason": "Изменились планы поездки.",
+      "penalty_amount": 9100,
+      "cancelled_at": "2026-03-22 18:22:27.016418",
+      "source": "website",
+      "initiator": "guest",
+      "booking_id": 4,
+      "cancellation_rule_id": 2
+    }
+  ],
+  "ui_consent": [
+    {
+      "id": 1,
+      "type": "marketing",
+      "status": "granted",
+      "source": "check-in form",
+      "obtained_at": "2025-09-24 18:22:27.004906",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.005905",
+      "client_id": 1
+    },
+    {
+      "id": 2,
+      "type": "sms",
+      "status": "granted",
+      "source": "front desk",
+      "obtained_at": "2025-09-24 18:22:27.005905",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.005905",
+      "client_id": 1
+    },
+    {
+      "id": 3,
+      "type": "marketing",
+      "status": "denied",
+      "source": "email",
+      "obtained_at": "2025-09-24 18:22:27.005905",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.006906",
+      "client_id": 2
+    },
+    {
+      "id": 4,
+      "type": "marketing",
+      "status": "granted",
+      "source": "website booking",
+      "obtained_at": "2025-09-24 18:22:27.006906",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.006906",
+      "client_id": 3
+    },
+    {
+      "id": 5,
+      "type": "marketing",
+      "status": "granted",
+      "source": "front desk",
+      "obtained_at": "2025-09-24 18:22:27.006906",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.006906",
+      "client_id": 4
+    },
+    {
+      "id": 6,
+      "type": "marketing",
+      "status": "granted",
+      "source": "loyalty program",
+      "obtained_at": "2025-09-24 18:22:27.006906",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.007905",
+      "client_id": 5
+    },
+    {
+      "id": 7,
+      "type": "email",
+      "status": "granted",
+      "source": "loyalty program",
+      "obtained_at": "2025-09-24 18:22:27.007905",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.007905",
+      "client_id": 5
+    },
+    {
+      "id": 8,
+      "type": "marketing",
+      "status": "granted",
+      "source": "website",
+      "obtained_at": "2025-09-24 18:22:27.007905",
+      "revoked_at": null,
+      "created_at": "2026-03-23 18:22:27.008409",
+      "client_id": 6
+    }
+  ],
+  "ui_employee": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.981097",
+      "updated_at": "2026-03-23 18:22:26.981097",
+      "user_id": 1001,
+      "full_name": "Мария Иванова",
+      "position": "Старший администратор",
+      "status": "active",
+      "department_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.981613",
+      "updated_at": "2026-03-23 18:22:26.981613",
+      "user_id": 1002,
+      "full_name": "Алексей Морозов",
+      "position": "Консьерж",
+      "status": "active",
+      "department_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.981613",
+      "updated_at": "2026-03-23 18:22:26.981613",
+      "user_id": 1003,
+      "full_name": "Наталья Белова",
+      "position": "Финансовый контролёр",
+      "status": "active",
+      "department_id": 3
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.982127",
+      "updated_at": "2026-03-23 18:22:26.982127",
+      "user_id": 1004,
+      "full_name": "Ольга Соколова",
+      "position": "Супервайзер",
+      "status": "active",
+      "department_id": 4
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.982127",
+      "updated_at": "2026-03-23 18:22:26.982127",
+      "user_id": 1005,
+      "full_name": "Денис Кравцов",
+      "position": "Системный администратор",
+      "status": "active",
+      "department_id": 5
+    }
+  ],
+  "ui_auditlog": [
+    {
+      "id": 1,
+      "entity": "Ticket",
+      "entity_id": 1,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.046464",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 1,
+      "actor_employee_id": null
+    },
+    {
+      "id": 2,
+      "entity": "Ticket",
+      "entity_id": 1,
+      "action": "agent_action",
+      "details": "{\"tool\": \"recommend_service\", \"risk\": \"medium\"}",
+      "risk": "medium",
+      "created_at": "2026-03-23 18:22:27.046464",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 2,
+      "actor_employee_id": null
+    },
+    {
+      "id": 3,
+      "entity": "Ticket",
+      "entity_id": 1,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.046464",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 3,
+      "actor_employee_id": null
+    },
+    {
+      "id": 4,
+      "entity": "Ticket",
+      "entity_id": 1,
+      "action": "agent_action",
+      "details": "{\"tool\": \"recommend_service\", \"risk\": \"medium\"}",
+      "risk": "medium",
+      "created_at": "2026-03-23 18:22:27.046464",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 4,
+      "actor_employee_id": null
+    },
+    {
+      "id": 5,
+      "entity": "Ticket",
+      "entity_id": 2,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.047970",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 5,
+      "actor_employee_id": null
+    },
+    {
+      "id": 6,
+      "entity": "Ticket",
+      "entity_id": 2,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.047970",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 6,
+      "actor_employee_id": null
+    },
+    {
+      "id": 7,
+      "entity": "Ticket",
+      "entity_id": 3,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.047970",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 7,
+      "actor_employee_id": null
+    },
+    {
+      "id": 8,
+      "entity": "Ticket",
+      "entity_id": 3,
+      "action": "agent_action",
+      "details": "{\"tool\": \"draft_reply\", \"risk\": \"low\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.048975",
+      "actor_agent_id": 1,
+      "ai_action_log_id": 8,
+      "actor_employee_id": null
+    },
+    {
+      "id": 9,
+      "entity": "Room",
+      "entity_id": 1,
+      "action": "update",
+      "details": "{\"field\": \"state\", \"from\": \"cleaning\", \"to\": \"available\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.048975",
+      "actor_agent_id": null,
+      "ai_action_log_id": null,
+      "actor_employee_id": 5
+    },
+    {
+      "id": 10,
+      "entity": "Task",
+      "entity_id": 1,
+      "action": "create",
+      "details": "{\"department\": \"Front Office\"}",
+      "risk": "low",
+      "created_at": "2026-03-23 18:22:27.049976",
+      "actor_agent_id": null,
+      "ai_action_log_id": null,
+      "actor_employee_id": 5
+    }
+  ],
+  "ui_loyalty": [
+    {
+      "id": 1,
+      "level": "Gold",
+      "points": 12450,
+      "updated_at": "2026-03-23 18:22:27.008409",
+      "client_id": 1
+    },
+    {
+      "id": 2,
+      "level": "Silver",
+      "points": 3420,
+      "updated_at": "2026-03-23 18:22:27.008409",
+      "client_id": 2
+    },
+    {
+      "id": 3,
+      "level": "Bronze",
+      "points": 980,
+      "updated_at": "2026-03-23 18:22:27.009413",
+      "client_id": 3
+    },
+    {
+      "id": 4,
+      "level": "Platinum",
+      "points": 30210,
+      "updated_at": "2026-03-23 18:22:27.009413",
+      "client_id": 5
+    }
+  ],
+  "ui_campaigntemplate": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.029946",
+      "campaign_id": 1,
+      "template_id": 2
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.029946",
+      "campaign_id": 1,
+      "template_id": 4
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.030951",
+      "campaign_id": 2,
+      "template_id": 3
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.030951",
+      "campaign_id": 2,
+      "template_id": 1
+    }
+  ],
+  "ui_payment": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.017922",
+      "updated_at": "2026-03-23 18:22:27.017922",
+      "amount": 84000,
+      "method": "card",
+      "status": "paid",
+      "provider_ref": "pay_1_1",
+      "booking_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.017922",
+      "updated_at": "2026-03-23 18:22:27.017922",
+      "amount": 42500,
+      "method": "invoice",
+      "status": "paid",
+      "provider_ref": "pay_2_2",
+      "booking_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.018928",
+      "updated_at": "2026-03-23 18:22:27.018928",
+      "amount": 97200,
+      "method": "card",
+      "status": "paid",
+      "provider_ref": "pay_3_3",
+      "booking_id": 3
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.018928",
+      "updated_at": "2026-03-23 18:22:27.018928",
+      "amount": 0,
+      "method": "card",
+      "status": "void",
+      "provider_ref": "pay_4_4",
+      "booking_id": 4
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:27.018928",
+      "updated_at": "2026-03-23 18:22:27.018928",
+      "amount": 58900,
+      "method": "card",
+      "status": "paid",
+      "provider_ref": "pay_5_5",
+      "booking_id": 5
+    }
+  ],
+  "ui_paymentevent": [
+    {
+      "id": 1,
+      "status": "created",
+      "payload": "{\"ref\": \"pay_1_1\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 1
+    },
+    {
+      "id": 2,
+      "status": "captured",
+      "payload": "{\"amount\": \"84000.00\", \"currency\": \"RUB\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 1
+    },
+    {
+      "id": 3,
+      "status": "created",
+      "payload": "{\"ref\": \"pay_2_2\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 2
+    },
+    {
+      "id": 4,
+      "status": "captured",
+      "payload": "{\"amount\": \"42500.00\", \"currency\": \"RUB\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 2
+    },
+    {
+      "id": 5,
+      "status": "created",
+      "payload": "{\"ref\": \"pay_3_3\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 3
+    },
+    {
+      "id": 6,
+      "status": "captured",
+      "payload": "{\"amount\": \"97200.00\", \"currency\": \"RUB\"}",
+      "created_at": "2026-03-23 18:22:27.019928",
+      "source": "payments_service",
+      "payment_id": 3
+    },
+    {
+      "id": 7,
+      "status": "created",
+      "payload": "{\"ref\": \"pay_4_4\"}",
+      "created_at": "2026-03-23 18:22:27.020928",
+      "source": "payments_service",
+      "payment_id": 4
+    },
+    {
+      "id": 8,
+      "status": "voided",
+      "payload": "{\"reason\": \"cancelled\"}",
+      "created_at": "2026-03-23 18:22:27.020928",
+      "source": "payments_service",
+      "payment_id": 4
+    },
+    {
+      "id": 9,
+      "status": "created",
+      "payload": "{\"ref\": \"pay_5_5\"}",
+      "created_at": "2026-03-23 18:22:27.021432",
+      "source": "payments_service",
+      "payment_id": 5
+    },
+    {
+      "id": 10,
+      "status": "captured",
+      "payload": "{\"amount\": \"58900.00\", \"currency\": \"RUB\"}",
+      "created_at": "2026-03-23 18:22:27.021432",
+      "source": "payments_service",
+      "payment_id": 5
+    }
+  ],
+  "ui_cancellationrule": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.972890",
+      "updated_at": "2026-03-23 18:22:26.972890",
+      "deadline_hours": 24,
+      "penalty_rule": "{\"type\": \"percent_first_night\", \"value\": 0}",
+      "rate_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.973404",
+      "updated_at": "2026-03-23 18:22:26.973404",
+      "deadline_hours": 12,
+      "penalty_rule": "{\"type\": \"percent_first_night\", \"value\": 50}",
+      "rate_id": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.973917",
+      "updated_at": "2026-03-23 18:22:26.973917",
+      "deadline_hours": 6,
+      "penalty_rule": "{\"type\": \"percent_first_night\", \"value\": 100}",
+      "rate_id": 1
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.973917",
+      "updated_at": "2026-03-23 18:22:26.973917",
+      "deadline_hours": 24,
+      "penalty_rule": "{\"type\": \"flat\", \"value\": 0}",
+      "rate_id": 3
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.974429",
+      "updated_at": "2026-03-23 18:22:26.974429",
+      "deadline_hours": 0,
+      "penalty_rule": "{\"type\": \"percent_total\", \"value\": 100}",
+      "rate_id": 2
+    }
+  ],
+  "ui_employeerole": [
+    {
+      "id": 1,
+      "assigned_at": "2026-03-23 18:22:26.996391",
+      "expires_at": null,
+      "source": "HR",
+      "initiator": "system",
+      "employee_id": 1,
+      "role_id": 2
+    },
+    {
+      "id": 2,
+      "assigned_at": "2026-03-23 18:22:26.996391",
+      "expires_at": null,
+      "source": "HR",
+      "initiator": "system",
+      "employee_id": 2,
+      "role_id": 2
+    },
+    {
+      "id": 3,
+      "assigned_at": "2026-03-23 18:22:26.996391",
+      "expires_at": null,
+      "source": "HR",
+      "initiator": "system",
+      "employee_id": 3,
+      "role_id": 3
+    },
+    {
+      "id": 4,
+      "assigned_at": "2026-03-23 18:22:26.996391",
+      "expires_at": null,
+      "source": "HR",
+      "initiator": "system",
+      "employee_id": 4,
+      "role_id": 4
+    },
+    {
+      "id": 5,
+      "assigned_at": "2026-03-23 18:22:26.996391",
+      "expires_at": null,
+      "source": "HR",
+      "initiator": "system",
+      "employee_id": 5,
+      "role_id": 1
+    }
+  ],
+  "ui_rolepermission": [
+    {
+      "id": 1,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 1,
+      "role_id": 1
+    },
+    {
+      "id": 2,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 2,
+      "role_id": 1
+    },
+    {
+      "id": 3,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 3,
+      "role_id": 1
+    },
+    {
+      "id": 4,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 4,
+      "role_id": 1
+    },
+    {
+      "id": 5,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 5,
+      "role_id": 1
+    },
+    {
+      "id": 6,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 6,
+      "role_id": 1
+    },
+    {
+      "id": 7,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 7,
+      "role_id": 1
+    },
+    {
+      "id": 8,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 8,
+      "role_id": 1
+    },
+    {
+      "id": 9,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 9,
+      "role_id": 1
+    },
+    {
+      "id": 10,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 10,
+      "role_id": 1
+    },
+    {
+      "id": 11,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 11,
+      "role_id": 1
+    },
+    {
+      "id": 12,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 12,
+      "role_id": 1
+    },
+    {
+      "id": 13,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 13,
+      "role_id": 1
+    },
+    {
+      "id": 14,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 1,
+      "role_id": 2
+    },
+    {
+      "id": 15,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 2,
+      "role_id": 2
+    },
+    {
+      "id": 16,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 3,
+      "role_id": 2
+    },
+    {
+      "id": 17,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 4,
+      "role_id": 2
+    },
+    {
+      "id": 18,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 5,
+      "role_id": 2
+    },
+    {
+      "id": 19,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 8,
+      "role_id": 2
+    },
+    {
+      "id": 20,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 9,
+      "role_id": 2
+    },
+    {
+      "id": 21,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 10,
+      "role_id": 2
+    },
+    {
+      "id": 22,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 13,
+      "role_id": 2
+    },
+    {
+      "id": 23,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 6,
+      "role_id": 3
+    },
+    {
+      "id": 24,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 7,
+      "role_id": 3
+    },
+    {
+      "id": 25,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 3,
+      "role_id": 3
+    },
+    {
+      "id": 26,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 13,
+      "role_id": 3
+    },
+    {
+      "id": 27,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 10,
+      "role_id": 4
+    },
+    {
+      "id": 28,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 3,
+      "role_id": 4
+    },
+    {
+      "id": 29,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 11,
+      "role_id": 4
+    },
+    {
+      "id": 30,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 13,
+      "role_id": 4
+    },
+    {
+      "id": 31,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 12,
+      "role_id": 5
+    },
+    {
+      "id": 32,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 8,
+      "role_id": 5
+    },
+    {
+      "id": 33,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 3,
+      "role_id": 5
+    },
+    {
+      "id": 34,
+      "granted_at": null,
+      "source": "",
+      "permission_id": 13,
+      "role_id": 5
+    }
+  ],
+  "ui_room": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.969286",
+      "updated_at": "2026-03-23 18:22:26.969286",
+      "room_number": "101",
+      "state": "available",
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.969801",
+      "updated_at": "2026-03-23 18:22:26.969801",
+      "room_number": "102",
+      "state": "cleaning",
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.970316",
+      "updated_at": "2026-03-23 18:22:26.970316",
+      "room_number": "203",
+      "state": "occupied",
+      "category_id": 2
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:26.970316",
+      "updated_at": "2026-03-23 18:22:26.970316",
+      "room_number": "204",
+      "state": "maintenance",
+      "category_id": 2
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:26.970829",
+      "updated_at": "2026-03-23 18:22:26.970829",
+      "room_number": "305",
+      "state": "available",
+      "category_id": 3
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:22:26.970829",
+      "updated_at": "2026-03-23 18:22:26.970829",
+      "room_number": "306",
+      "state": "reserved",
+      "category_id": 3
+    },
+    {
+      "id": 7,
+      "created_at": "2026-03-23 18:22:26.971346",
+      "updated_at": "2026-03-23 18:22:26.971346",
+      "room_number": "401",
+      "state": "available",
+      "category_id": 4
+    },
+    {
+      "id": 8,
+      "created_at": "2026-03-23 18:22:26.971346",
+      "updated_at": "2026-03-23 18:22:26.971346",
+      "room_number": "402",
+      "state": "available",
+      "category_id": 4
+    }
+  ],
+  "ui_offer": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:26.975460",
+      "updated_at": "2026-03-23 18:22:26.975460",
+      "name": "Sea Weekend",
+      "conditions": "{\"min_nights\": 2, \"discount_percent\": 10, \"includes\": [\"Breakfast\", \"Spa access\"]}",
+      "start_date": "2026-02-06",
+      "end_date": "2026-05-22",
+      "rate_id": 1,
+      "category_id": 3
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:26.976464",
+      "updated_at": "2026-03-23 18:22:26.976464",
+      "name": "Family Comfort",
+      "conditions": "{\"min_nights\": 3, \"kids_stay_free\": true, \"includes\": [\"Breakfast\"]}",
+      "start_date": "2026-02-21",
+      "end_date": "2026-06-21",
+      "rate_id": 1,
+      "category_id": 4
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:26.976464",
+      "updated_at": "2026-03-23 18:22:26.976464",
+      "name": "Business Express",
+      "conditions": "{\"min_nights\": 1, \"early_check_in\": true, \"includes\": [\"Parking\"]}",
+      "start_date": null,
+      "end_date": null,
+      "rate_id": 3,
+      "category_id": 2
+    }
+  ],
+  "ui_booking": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.010418",
+      "updated_at": "2026-03-23 18:22:27.010418",
+      "check_in": "2026-03-13",
+      "check_out": "2026-03-16",
+      "status": "completed",
+      "source": "website",
+      "total_cost": 84000,
+      "client_id": 1,
+      "rate_id": 1,
+      "room_id": 5,
+      "category_id": 3
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.010418",
+      "updated_at": "2026-03-23 18:22:27.010418",
+      "check_in": "2026-03-20",
+      "check_out": "2026-03-24",
+      "status": "in_house",
+      "source": "corporate",
+      "total_cost": 42500,
+      "client_id": 2,
+      "rate_id": 3,
+      "room_id": 3,
+      "category_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.011418",
+      "updated_at": "2026-03-23 18:22:27.011418",
+      "check_in": "2026-03-30",
+      "check_out": "2026-04-04",
+      "status": "confirmed",
+      "source": "ota",
+      "total_cost": 97200,
+      "client_id": 3,
+      "rate_id": 1,
+      "room_id": 7,
+      "category_id": 4
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.011418",
+      "updated_at": "2026-03-23 18:22:27.011418",
+      "check_in": "2026-03-25",
+      "check_out": "2026-03-27",
+      "status": "cancelled",
+      "source": "website",
+      "total_cost": 36400,
+      "client_id": 4,
+      "rate_id": 1,
+      "room_id": null,
+      "category_id": 1
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:27.012417",
+      "updated_at": "2026-04-08 12:22:29.746274",
+      "check_in": "2026-04-12",
+      "check_out": "2026-04-14",
+      "status": "completed",
+      "source": "loyalty",
+      "total_cost": 58900,
+      "client_id": 5,
+      "rate_id": 2,
+      "room_id": 6,
+      "category_id": 3
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:22:27.012417",
+      "updated_at": "2026-03-23 18:22:27.012417",
+      "check_in": "2026-03-24",
+      "check_out": "2026-03-26",
+      "status": "pending",
+      "source": "website",
+      "total_cost": 31800,
+      "client_id": 6,
+      "rate_id": 1,
+      "room_id": null,
+      "category_id": 2
+    },
+    {
+      "id": 7,
+      "created_at": "2026-03-23 18:49:16.706751",
+      "updated_at": "2026-04-08 12:21:48.147592",
+      "check_in": "2026-01-10",
+      "check_out": "2026-02-10",
+      "status": "pending",
+      "source": "website",
+      "total_cost": 10000,
+      "client_id": 1,
+      "rate_id": 2,
+      "room_id": 1,
+      "category_id": 1
+    }
+  ],
+  "ui_offerservice": [
+    {
+      "id": 1,
+      "quantity": 2,
+      "conditions": "{\"included\": true}",
+      "created_at": "2026-03-23 18:22:26.977969",
+      "offer_id": 1,
+      "service_id": 3
+    },
+    {
+      "id": 2,
+      "quantity": 1,
+      "conditions": "{\"included\": true}",
+      "created_at": "2026-03-23 18:22:26.977969",
+      "offer_id": 1,
+      "service_id": 5
+    },
+    {
+      "id": 3,
+      "quantity": 3,
+      "conditions": "{\"included\": true}",
+      "created_at": "2026-03-23 18:22:26.978975",
+      "offer_id": 2,
+      "service_id": 3
+    },
+    {
+      "id": 4,
+      "quantity": 1,
+      "conditions": "{\"included\": true}",
+      "created_at": "2026-03-23 18:22:26.978975",
+      "offer_id": 3,
+      "service_id": 4
+    }
+  ],
+  "ui_task": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.044464",
+      "updated_at": "2026-03-23 18:22:27.044464",
+      "type": "guest_support",
+      "status": "open",
+      "description": "Связаться с гостем, уточнить детали запроса и предложить варианты.",
+      "due": "2026-03-24 00:22:26.958476",
+      "assignee_id": 1,
+      "booking_id": 1,
+      "department_id": 1,
+      "ticket_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.044464",
+      "updated_at": "2026-03-23 18:22:27.044464",
+      "type": "guest_support",
+      "status": "open",
+      "description": "Связаться с гостем, уточнить детали запроса и предложить варианты.",
+      "due": "2026-03-24 18:22:26.958476",
+      "assignee_id": 1,
+      "booking_id": 2,
+      "department_id": 1,
+      "ticket_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.044464",
+      "updated_at": "2026-03-23 18:22:27.044464",
+      "type": "room_setup",
+      "status": "open",
+      "description": "Подготовить детскую кроватку и комплект белья.",
+      "due": "2026-03-24 18:22:26.958476",
+      "assignee_id": 4,
+      "booking_id": 3,
+      "department_id": 4,
+      "ticket_id": 3
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.045465",
+      "updated_at": "2026-03-23 18:22:27.045465",
+      "type": "guest_support",
+      "status": "open",
+      "description": "Связаться с гостем, уточнить детали запроса и предложить варианты.",
+      "due": "2026-03-24 06:22:26.958476",
+      "assignee_id": 1,
+      "booking_id": 4,
+      "department_id": 1,
+      "ticket_id": 4
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:27.045465",
+      "updated_at": "2026-03-23 18:22:27.045465",
+      "type": "guest_support",
+      "status": "open",
+      "description": "Связаться с гостем, уточнить детали запроса и предложить варианты.",
+      "due": "2026-03-25 18:22:26.958476",
+      "assignee_id": 1,
+      "booking_id": 5,
+      "department_id": 1,
+      "ticket_id": 5
+    },
+    {
+      "id": 6,
+      "created_at": "2026-04-08 11:49:12.120080",
+      "updated_at": "2026-04-08 11:49:12.121081",
+      "type": "аыа",
+      "status": "аца",
+      "description": "Текст",
+      "due": "2026-04-16 00:00:00",
+      "assignee_id": 1,
+      "booking_id": 1,
+      "department_id": 4,
+      "ticket_id": 3
+    }
+  ],
+  "ui_ticket": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.021432",
+      "updated_at": "2026-03-23 18:22:27.021432",
+      "subject": "Поздний выезд",
+      "priority": "high",
+      "status": "open",
+      "sla_due_at": "2026-03-24 00:22:26.958476",
+      "booking_id": 1,
+      "client_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.021432",
+      "updated_at": "2026-04-08 12:24:05.860807",
+      "subject": "Закрывающие документы",
+      "priority": "medium",
+      "status": "pending",
+      "sla_due_at": "2026-03-24 18:22:26",
+      "booking_id": 2,
+      "client_id": 2
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.022437",
+      "updated_at": "2026-03-23 18:22:27.022437",
+      "subject": "Детская кроватка",
+      "priority": "medium",
+      "status": "open",
+      "sla_due_at": "2026-03-24 06:22:26.958476",
+      "booking_id": 3,
+      "client_id": 3
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.022437",
+      "updated_at": "2026-03-23 18:22:27.022437",
+      "subject": "Отмена бронирования",
+      "priority": "high",
+      "status": "resolved",
+      "sla_due_at": null,
+      "booking_id": 4,
+      "client_id": 4
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:27.023437",
+      "updated_at": "2026-03-23 18:22:27.023437",
+      "subject": "Парковка и поздний заезд",
+      "priority": "low",
+      "status": "open",
+      "sla_due_at": "2026-03-25 18:22:26.958476",
+      "booking_id": 5,
+      "client_id": 5
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-24 06:38:22.053967",
+      "updated_at": "2026-03-24 06:38:22.053967",
+      "subject": "Не работает кран",
+      "priority": "Высокий",
+      "status": "В обработке",
+      "sla_due_at": "2026-03-17 06:38:19",
+      "booking_id": 7,
+      "client_id": 1
+    }
+  ],
+  "ui_message": [
+    {
+      "id": 1,
+      "channel": "email",
+      "direction": "inbound",
+      "text": "Здравствуйте! Вопрос по теме: Поздний выезд.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.023437",
+      "campaign_id": null,
+      "contact_channel_id": 1,
+      "template_id": null,
+      "ticket_id": 1
+    },
+    {
+      "id": 2,
+      "channel": "email",
+      "direction": "outbound",
+      "text": "Приняли запрос, уточняем детали и вернёмся с ответом в ближайшее время.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.024437",
+      "campaign_id": null,
+      "contact_channel_id": 1,
+      "template_id": 1,
+      "ticket_id": 1
+    },
+    {
+      "id": 3,
+      "channel": "email",
+      "direction": "inbound",
+      "text": "Здравствуйте! Вопрос по теме: Закрывающие документы.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.024437",
+      "campaign_id": null,
+      "contact_channel_id": 4,
+      "template_id": null,
+      "ticket_id": 2
+    },
+    {
+      "id": 4,
+      "channel": "email",
+      "direction": "outbound",
+      "text": "Приняли запрос, уточняем детали и вернёмся с ответом в ближайшее время.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.025437",
+      "campaign_id": null,
+      "contact_channel_id": 4,
+      "template_id": 1,
+      "ticket_id": 2
+    },
+    {
+      "id": 5,
+      "channel": "email",
+      "direction": "inbound",
+      "text": "Здравствуйте! Вопрос по теме: Детская кроватка.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.025437",
+      "campaign_id": null,
+      "contact_channel_id": 7,
+      "template_id": null,
+      "ticket_id": 3
+    },
+    {
+      "id": 6,
+      "channel": "email",
+      "direction": "outbound",
+      "text": "Приняли запрос, уточняем детали и вернёмся с ответом в ближайшее время.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.025437",
+      "campaign_id": null,
+      "contact_channel_id": 7,
+      "template_id": 1,
+      "ticket_id": 3
+    },
+    {
+      "id": 7,
+      "channel": "phone",
+      "direction": "inbound",
+      "text": "Здравствуйте! Вопрос по теме: Отмена бронирования.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.026436",
+      "campaign_id": null,
+      "contact_channel_id": 9,
+      "template_id": null,
+      "ticket_id": 4
+    },
+    {
+      "id": 8,
+      "channel": "phone",
+      "direction": "outbound",
+      "text": "Приняли запрос, уточняем детали и вернёмся с ответом в ближайшее время.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.026436",
+      "campaign_id": null,
+      "contact_channel_id": 9,
+      "template_id": 1,
+      "ticket_id": 4
+    },
+    {
+      "id": 9,
+      "channel": "email",
+      "direction": "inbound",
+      "text": "Здравствуйте! Вопрос по теме: Парковка и поздний заезд.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.026436",
+      "campaign_id": null,
+      "contact_channel_id": 11,
+      "template_id": null,
+      "ticket_id": 5
+    },
+    {
+      "id": 10,
+      "channel": "email",
+      "direction": "outbound",
+      "text": "Приняли запрос, уточняем детали и вернёмся с ответом в ближайшее время.",
+      "attachments": null,
+      "created_at": "2026-03-23 18:22:27.026436",
+      "campaign_id": null,
+      "contact_channel_id": 11,
+      "template_id": 1,
+      "ticket_id": 5
+    }
+  ],
+  "ui_contactchannel": [
+    {
+      "id": 1,
+      "created_at": "2026-03-23 18:22:27.000905",
+      "updated_at": "2026-03-23 18:22:27.000905",
+      "type": "email",
+      "value": "anna.smirnova@example.com",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.000905",
+      "priority": 1,
+      "client_id": 1
+    },
+    {
+      "id": 2,
+      "created_at": "2026-03-23 18:22:27.000905",
+      "updated_at": "2026-03-23 18:22:27.000905",
+      "type": "phone",
+      "value": "+7 900 100-22-33",
+      "is_primary": 0,
+      "verified_at": "2026-02-21 18:22:27.000905",
+      "priority": 2,
+      "client_id": 1
+    },
+    {
+      "id": 3,
+      "created_at": "2026-03-23 18:22:27.001906",
+      "updated_at": "2026-03-23 18:22:27.001906",
+      "type": "whatsapp",
+      "value": "+7 900 100-22-33",
+      "is_primary": 1,
+      "verified_at": null,
+      "priority": 1,
+      "client_id": 1
+    },
+    {
+      "id": 4,
+      "created_at": "2026-03-23 18:22:27.001906",
+      "updated_at": "2026-03-23 18:22:27.001906",
+      "type": "email",
+      "value": "ilya.petrov@workmail.ru",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.001906",
+      "priority": 1,
+      "client_id": 2
+    },
+    {
+      "id": 5,
+      "created_at": "2026-03-23 18:22:27.002905",
+      "updated_at": "2026-03-23 18:22:27.002905",
+      "type": "phone",
+      "value": "+7 900 200-33-44",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.001906",
+      "priority": 1,
+      "client_id": 2
+    },
+    {
+      "id": 6,
+      "created_at": "2026-03-23 18:22:27.002905",
+      "updated_at": "2026-03-23 18:22:27.002905",
+      "type": "telegram",
+      "value": "@ilya_petrov",
+      "is_primary": 0,
+      "verified_at": null,
+      "priority": 3,
+      "client_id": 2
+    },
+    {
+      "id": 7,
+      "created_at": "2026-03-23 18:22:27.002905",
+      "updated_at": "2026-03-23 18:22:27.002905",
+      "type": "email",
+      "value": "m.kim@travelbox.me",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.002905",
+      "priority": 1,
+      "client_id": 3
+    },
+    {
+      "id": 8,
+      "created_at": "2026-03-23 18:22:27.002905",
+      "updated_at": "2026-03-23 18:22:27.002905",
+      "type": "phone",
+      "value": "+7 900 300-44-55",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.002905",
+      "priority": 1,
+      "client_id": 3
+    },
+    {
+      "id": 9,
+      "created_at": "2026-03-23 18:22:27.003906",
+      "updated_at": "2026-03-23 18:22:27.003906",
+      "type": "phone",
+      "value": "+7 900 400-55-66",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.002905",
+      "priority": 1,
+      "client_id": 4
+    },
+    {
+      "id": 10,
+      "created_at": "2026-03-23 18:22:27.003906",
+      "updated_at": "2026-03-23 18:22:27.003906",
+      "type": "email",
+      "value": "oleg.vasiliev@sunroute.ru",
+      "is_primary": 0,
+      "verified_at": "2026-02-21 18:22:27.003906",
+      "priority": 2,
+      "client_id": 4
+    },
+    {
+      "id": 11,
+      "created_at": "2026-03-23 18:22:27.003906",
+      "updated_at": "2026-03-23 18:22:27.003906",
+      "type": "email",
+      "value": "elena.orlova@stayclub.com",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.003906",
+      "priority": 1,
+      "client_id": 5
+    },
+    {
+      "id": 12,
+      "created_at": "2026-03-23 18:22:27.004906",
+      "updated_at": "2026-03-23 18:22:27.004906",
+      "type": "phone",
+      "value": "+7 900 500-66-77",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.003906",
+      "priority": 1,
+      "client_id": 5
+    },
+    {
+      "id": 13,
+      "created_at": "2026-03-23 18:22:27.004906",
+      "updated_at": "2026-03-23 18:22:27.004906",
+      "type": "whatsapp",
+      "value": "+7 900 500-66-77",
+      "is_primary": 0,
+      "verified_at": null,
+      "priority": 2,
+      "client_id": 5
+    },
+    {
+      "id": 14,
+      "created_at": "2026-03-23 18:22:27.004906",
+      "updated_at": "2026-03-23 18:22:27.004906",
+      "type": "email",
+      "value": "s.novikova@mail.ru",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.004906",
+      "priority": 1,
+      "client_id": 6
+    },
+    {
+      "id": 15,
+      "created_at": "2026-03-23 18:22:27.004906",
+      "updated_at": "2026-03-23 18:22:27.004906",
+      "type": "phone",
+      "value": "+7 916 124-11-09",
+      "is_primary": 1,
+      "verified_at": "2026-02-21 18:22:27.004906",
+      "priority": 1,
+      "client_id": 6
+    }
+  ],
+  "ui_bookingitem": [
+    {
+      "id": 1,
+      "item_type": "offer",
+      "quantity": 1,
+      "amount": 0,
+      "comment": "Пакет применён к тарифу.",
+      "created_at": "2026-03-23 18:22:27.013418",
+      "booking_id": 1,
+      "offer_id": 1,
+      "service_id": null
+    },
+    {
+      "id": 2,
+      "item_type": "service",
+      "quantity": 1,
+      "amount": 2500,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.014418",
+      "booking_id": 1,
+      "offer_id": null,
+      "service_id": 1
+    },
+    {
+      "id": 3,
+      "item_type": "service",
+      "quantity": 1,
+      "amount": 1500,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.014418",
+      "booking_id": 1,
+      "offer_id": null,
+      "service_id": 5
+    },
+    {
+      "id": 4,
+      "item_type": "offer",
+      "quantity": 1,
+      "amount": 0,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.015418",
+      "booking_id": 2,
+      "offer_id": 3,
+      "service_id": null
+    },
+    {
+      "id": 5,
+      "item_type": "fee",
+      "quantity": 1,
+      "amount": 500,
+      "comment": "Городской сбор",
+      "created_at": "2026-03-23 18:22:27.015418",
+      "booking_id": 2,
+      "offer_id": null,
+      "service_id": null
+    },
+    {
+      "id": 6,
+      "item_type": "offer",
+      "quantity": 1,
+      "amount": 0,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.016418",
+      "booking_id": 3,
+      "offer_id": 2,
+      "service_id": null
+    },
+    {
+      "id": 7,
+      "item_type": "service",
+      "quantity": 2,
+      "amount": 1200,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.016418",
+      "booking_id": 3,
+      "offer_id": null,
+      "service_id": 4
+    },
+    {
+      "id": 8,
+      "item_type": "service",
+      "quantity": 2,
+      "amount": 1800,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.016418",
+      "booking_id": 5,
+      "offer_id": null,
+      "service_id": 3
+    },
+    {
+      "id": 9,
+      "item_type": "service",
+      "quantity": 1,
+      "amount": 1800,
+      "comment": "",
+      "created_at": "2026-03-23 18:22:27.016418",
+      "booking_id": 5,
+      "offer_id": null,
+      "service_id": 2
+    }
+  ]
+}

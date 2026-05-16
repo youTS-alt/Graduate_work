@@ -1,0 +1,46 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+<section class="card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Traceability</p>
+            <h3>Журнал аудита</h3>
+        </div>
+    </div>
+    <div class="toolbar-grid four-up">
+        <input type="text" placeholder="Период">
+        <select><option>Сущность</option></select>
+        <select><option>Действие</option></select>
+        <select><option>Инициатор / риск</option></select>
+    </div>
+    <div class="table-shell">
+        {% if audit_rows %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Время</th>
+                        <th>Сущность</th>
+                        <th>Действие</th>
+                        <th>Инициатор</th>
+                        <th>Риск</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in audit_rows %}
+                        <tr>
+                            <td>{{ row.created_at|date:"d.m.Y H:i" }}</td>
+                            <td>{{ row.entity }} #{{ row.entity_id }}</td>
+                            <td>{{ row.action }}</td>
+                            <td>{% if row.actor_employee %}{{ row.actor_employee }}{% else %}—{% endif %}</td>
+                            <td><span class="badge badge-{% if row.risk == 'high' %}danger{% elif row.risk == 'medium' %}warn{% else %}sea{% endif %}">{{ row.risk|default:"—" }}</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-state">События аудита пока отсутствуют.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

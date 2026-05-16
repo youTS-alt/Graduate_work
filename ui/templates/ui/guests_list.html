@@ -1,0 +1,61 @@
+﻿{% extends 'ui/base.html' %}
+{% load translate %}
+
+{% block content %}
+<section class="card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">CRM</p>
+            <h3>Список гостей</h3>
+        </div>
+        <div class=”button-row”>
+            <a class=”btn btn-primary” href=”{% url 'ui:crud_create' 'clients' %}”>Добавить гостя</a>
+        </div>
+    </div>
+    <form method="get" class="toolbar-grid compact">
+        <input type="text" name="q" value="{{ q }}" placeholder="Поиск по имени, телефону или email">
+        <select name="segment">
+            <option value="">Все сегменты</option>
+            {% for seg in segments %}
+                <option value="{{ seg }}" {% if seg == selected_segment %}selected{% endif %}>{{ seg|segment }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-secondary" type="submit">Найти</button>
+    </form>
+    <div class="table-shell">
+        {% if guests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Гость</th>
+                        <th>Сегмент</th>
+                        <th>Контакты</th>
+                        <th>Дата рождения</th>
+                        <th>Лояльность</th>
+                        <th>Примечания</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for guest in guests %}
+                        <tr>
+                            <td><a href="{% url 'ui:guest_detail' guest.id %}">{{ guest }}</a></td>
+                            <td>{{ guest.segment|segment|default:"—" }}</td>
+                            <td>
+                                {% for ch in guest.contact_channels.all %}
+                                    {% if ch.is_primary %}{{ ch.type }}: {{ ch.value }}<br>{% endif %}
+                                {% empty %}—{% endfor %}
+                            </td>
+                            <td>{{ guest.birth_date|date:"d.m.Y"|default:"—" }}</td>
+                            <td>{% if guest.loyalty_record %}{{ guest.loyalty_record.level }} ({{ guest.loyalty_record.points }}){% else %}—{% endif %}</td>
+                            <td>{{ guest.notes|default:"—" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-state">Р“РѕСЃС‚Рё РїРѕРєР° РЅРµ РґРѕР±Р°РІР»РµРЅС‹.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+

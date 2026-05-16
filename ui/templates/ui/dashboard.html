@@ -1,0 +1,121 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+<section class="metrics-grid">
+    {% for metric in metrics %}
+        <article class="metric-card card">
+            <p class="eyebrow">Метрика</p>
+            <h3>{{ metric.value }}</h3>
+            <p>{{ metric.label }}</p>
+            <span class="metric-delta">{{ metric.delta }}</span>
+        </article>
+    {% endfor %}
+</section>
+
+<section class="content-grid two-col-wide">
+    <article class="card">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Операционный радар — ИИ</p>
+                <h3>Рекомендации</h3>
+                {% if radar_summary %}<p class="text-muted" style="margin-top:4px;font-size:.85rem">{{ radar_summary }}</p>{% endif %}
+            </div>
+            <form method="post" action="{% url 'ui:refresh_radar' %}" style="margin:0">
+                {% csrf_token %}
+                <button class="btn btn-secondary" type="submit">Обновить</button>
+            </form>
+        </div>
+
+        {% if radar_items %}
+            <div class="stack-list">
+                {% for item in radar_items %}
+                    <div class="list-row {% if item.risk == 'high' %}soft-accent{% endif %}">
+                        <div style="flex:1">
+                            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                                <strong>{{ item.title }}</strong>
+                                <span class="badge {% if item.risk == 'high' %}badge-warn{% elif item.risk == 'medium' %}badge-sky{% else %}badge-muted{% endif %}">
+                                    {{ item.risk }}
+                                </span>
+                                {% if item.needs_approval %}<span class="badge badge-warn">подтверждение</span>{% endif %}
+                            </div>
+                            <p style="margin:4px 0 2px;font-size:.85rem;opacity:.8">{{ item.why }}</p>
+                            <p style="font-size:.85rem">{{ item.action }}</p>
+                        </div>
+                        {% if item.entity and item.entity.type and item.entity.type != 'null' %}
+                            <a class="btn btn-secondary"
+                               href="{% if item.entity.type == 'ticket' %}{% url 'ui:ticket_detail' item.entity.id %}{% elif item.entity.type == 'booking' %}{% url 'ui:booking_detail' item.entity.id %}{% else %}#{% endif %}">
+                                Открыть
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state" style="padding:24px 0;text-align:center">
+                {% if radar_report %}
+                    Нет данных от ИИ. Нажмите «Обновить».
+                {% else %}
+                    Радар ещё не запущен. Нажмите «Обновить» для первого анализа.
+                {% endif %}
+            </div>
+        {% endif %}
+    </article>
+
+    <article class="card">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Сегодня</p>
+                <h3>Последние бронирования</h3>
+            </div>
+        </div>
+        <div class="table-list">
+            {% for booking in recent_bookings %}
+                <a class="table-row" href="{% url 'ui:booking_detail' booking.id %}">
+                    <span>#{{ booking.id }}</span>
+                    <span>{{ booking.client }}</span>
+                    <span class="badge status-booking-{{ booking.status|slugify }}">{{ booking.status }}</span>
+                </a>
+            {% empty %}
+                <p class="empty-state">Пока нет бронирований для отображения.</p>
+            {% endfor %}
+        </div>
+    </article>
+</section>
+
+<section class="content-grid two-col-wide">
+    <article class="card">
+        <div class="section-head">
+            <h3>Открытые обращения</h3>
+            <a href="{% url 'ui:tickets_list' %}" class="text-link">Смотреть все</a>
+        </div>
+        <div class="stack-list">
+            {% for ticket in recent_tickets %}
+                <div class="list-row">
+                    <div>
+                        <strong>{{ ticket.subject }}</strong>
+                        <p>{{ ticket.client }} · {% if ticket.booking %}#{{ ticket.booking.id }}{% else %}—{% endif %}</p>
+                    </div>
+                    <span class="badge status-ticket-{{ ticket.status|slugify }}">{{ ticket.status }}</span>
+                </div>
+            {% empty %}
+                <p class="empty-state">Нет активных обращений.</p>
+            {% endfor %}
+        </div>
+    </article>
+
+    <article class="card sunset-panel">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Микротекст</p>
+                <h3>Гость ожидает ответа</h3>
+            </div>
+            <span class="badge badge-warn">Приоритет</span>
+        </div>
+        <p>Рекомендация: предложить поздний выезд, если загрузка номерного фонда позволит подтвердить опцию.</p>
+        <div class="button-row">
+            <button class="btn btn-primary" type="button">Подтвердить сценарий</button>
+            <button class="btn btn-secondary" type="button">Открыть диалог</button>
+        </div>
+    </article>
+</section>
+{% endblock %}

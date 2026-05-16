@@ -1,0 +1,35 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+<section class="card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">CRUD</p>
+            <h3>{{ spec.title }}</h3>
+        </div>
+        <div class="button-row">
+            <a class="btn btn-secondary" href="{% url 'ui:crud_list' spec.slug %}">Назад</a>
+        </div>
+    </div>
+    <form method="post" class="stack-list" style="gap: 12px;">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div>
+                <label><strong>{{ field.label }}</strong></label><br>
+                {{ field }}
+                {% if field.errors %}
+                    <div>{{ field.errors }}</div>
+                {% endif %}
+                {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="button-row">
+            <button class="btn btn-primary" type="submit">Сохранить</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
+

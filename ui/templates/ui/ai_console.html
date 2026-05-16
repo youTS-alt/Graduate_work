@@ -1,0 +1,213 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+<div class="ai-layout">
+
+    {# ── Левая панель: список сессий ── #}
+    <aside class="ai-sidebar card">
+        <div class="section-head" style="padding:16px 20px 12px">
+            <h3 style="font-size:1rem">Сессии</h3>
+            <form method="post" action="{% url 'ui:ai_new_session' %}">
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit" style="font-size:.8rem;padding:6px 14px">+ Новая</button>
+            </form>
+        </div>
+        <div class="session-list">
+            {% for s in sessions %}
+                <a class="session-item {% if active_session.pk == s.pk %}active{% endif %}"
+                   href="{% url 'ui:ai_console' %}?session={{ s.pk }}">
+                    <span class="session-title">{{ s.title|default:"Новая сессия" }}</span>
+                    <span class="session-date">{{ s.created_at|date:"d.m H:i" }}</span>
+                </a>
+            {% empty %}
+                <p style="padding:16px;opacity:.6;font-size:.85rem">Нет сессий. Создайте первую.</p>
+            {% endfor %}
+        </div>
+    </aside>
+
+    {# ── Правая панель: чат ── #}
+    <section class="ai-chat card">
+        {% if active_session %}
+            <div class="section-head" style="padding:16px 20px 12px;border-bottom:1px solid var(--mist)">
+                <div>
+                    <p class="eyebrow">ИИ-Консьерж</p>
+                    <h3 id="chat-title" style="font-size:1rem">{{ active_session.title|default:"Новая сессия" }}</h3>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                {% for msg in messages %}
+                    <div class="chat-bubble {{ msg.role }}">
+                        <div class="bubble-content">{{ msg.content|linebreaksbr }}</div>
+                        <div class="bubble-time">{{ msg.created_at|date:"H:i" }}</div>
+                    </div>
+                {% empty %}
+                    <div class="chat-empty">
+                        <p>Начните диалог. Примеры:</p>
+                        <ul>
+                            <li>Что известно о госте Орловой?</li>
+                            <li>Покажи детали тикета #3</li>
+                            <li>Предложи ответ гостю по тикету #6</li>
+                            <li>Какие задачи сейчас просрочены?</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                <div id="typing-indicator" class="chat-bubble assistant" style="display:none">
+                    <div class="bubble-content typing-dots"><span></span><span></span><span></span></div>
+                </div>
+            </div>
+
+            <form class="chat-input-row" id="chat-form" autocomplete="off">
+                {% csrf_token %}
+                <input type="hidden" name="session_id" value="{{ active_session.pk }}">
+                <textarea id="chat-input" name="message" class="chat-input"
+                          placeholder="Введите вопрос..." rows="1"></textarea>
+                <button class="btn btn-primary" type="submit" id="send-btn">Отправить</button>
+            </form>
+
+        {% else %}
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:.7">
+                <p style="font-size:1.1rem">Выберите сессию или создайте новую</p>
+                <form method="post" action="{% url 'ui:ai_new_session' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Начать диалог</button>
+                </form>
+            </div>
+        {% endif %}
+    </section>
+</div>
+
+<style>
+.ai-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 16px;
+    height: calc(100vh - 140px);
+    min-height: 500px;
+}
+.ai-sidebar { display:flex; flex-direction:column; overflow:hidden; padding:0; }
+.session-list { overflow-y:auto; flex:1; }
+.session-item {
+    display:flex; flex-direction:column; gap:2px;
+    padding:12px 20px; border-bottom:1px solid var(--mist);
+    text-decoration:none; color:var(--graphite); transition:background .15s;
+}
+.session-item:hover { background:var(--sand); }
+.session-item.active { background:#eaf4ff; border-left:3px solid var(--sky); }
+.session-title { font-size:.875rem; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.session-date  { font-size:.75rem; opacity:.55; }
+
+.ai-chat { display:flex; flex-direction:column; padding:0; overflow:hidden; }
+.chat-messages {
+    flex:1; overflow-y:auto; padding:20px;
+    display:flex; flex-direction:column; gap:12px;
+}
+.chat-bubble { display:flex; flex-direction:column; max-width:78%; }
+.chat-bubble.user      { align-self:flex-end; align-items:flex-end; }
+.chat-bubble.assistant { align-self:flex-start; }
+.bubble-content {
+    padding:10px 14px; border-radius:12px;
+    font-size:.9rem; line-height:1.5; white-space:pre-wrap;
+}
+.chat-bubble.user .bubble-content      { background:var(--sea); color:#fff; border-bottom-right-radius:4px; }
+.chat-bubble.assistant .bubble-content { background:var(--mist); color:var(--graphite); border-bottom-left-radius:4px; }
+.bubble-time { font-size:.7rem; opacity:.5; margin-top:3px; padding:0 4px; }
+
+.chat-input-row {
+    display:flex; gap:10px; padding:14px 20px;
+    border-top:1px solid var(--mist); align-items:flex-end;
+}
+.chat-input {
+    flex:1; resize:none; border:1px solid var(--mist);
+    border-radius:10px; padding:10px 14px;
+    font-size:.9rem; font-family:inherit; line-height:1.4;
+    max-height:120px; overflow-y:auto;
+}
+.chat-input:focus { outline:none; border-color:var(--sea); }
+.chat-empty { padding:40px 24px; opacity:.65; }
+.chat-empty ul { margin:12px 0 0 20px; line-height:2; font-size:.9rem; }
+
+.typing-dots { display:flex; gap:5px; padding:12px 14px; }
+.typing-dots span {
+    width:8px; height:8px; border-radius:50%;
+    background:var(--graphite); opacity:.4;
+    animation:blink 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay:.2s; }
+.typing-dots span:nth-child(3) { animation-delay:.4s; }
+@keyframes blink { 0%,80%,100%{opacity:.4} 40%{opacity:1} }
+</style>
+
+<script>
+(function () {
+    const form    = document.getElementById('chat-form');
+    if (!form) return;
+    const input   = document.getElementById('chat-input');
+    const log     = document.getElementById('chat-messages');
+    const typing  = document.getElementById('typing-indicator');
+    const sendBtn = document.getElementById('send-btn');
+    const titleEl = document.getElementById('chat-title');
+    const csrf    = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    input.addEventListener('input', () => {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+    });
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); }
+    });
+
+    function esc(s) {
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+    }
+    function addBubble(role, text) {
+        const now  = new Date();
+        const time = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+        const div  = document.createElement('div');
+        div.className = `chat-bubble ${role}`;
+        div.innerHTML = `<div class="bubble-content">${esc(text)}</div><div class="bubble-time">${time}</div>`;
+        log.insertBefore(div, typing);
+        log.scrollTop = log.scrollHeight;
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+
+        // Скрыть подсказку при первом сообщении
+        const empty = log.querySelector('.chat-empty');
+        if (empty) empty.remove();
+
+        addBubble('user', text);
+        input.value = '';
+        input.style.height = 'auto';
+        sendBtn.disabled = true;
+        typing.style.display = 'flex';
+        log.scrollTop = log.scrollHeight;
+
+        try {
+            const fd = new FormData(form);
+            fd.set('message', text);
+            const resp = await fetch('{% url "ui:ai_chat" %}', {
+                method:'POST',
+                headers:{'X-CSRFToken': csrf},
+                body: fd,
+            });
+            const data = await resp.json();
+            typing.style.display = 'none';
+            addBubble('assistant', data.reply || data.error || 'Нет ответа');
+            if (data.session_title && titleEl) titleEl.textContent = data.session_title;
+        } catch {
+            typing.style.display = 'none';
+            addBubble('assistant', 'Ошибка соединения с сервером.');
+        } finally {
+            sendBtn.disabled = false;
+            input.focus();
+        }
+    });
+
+    log.scrollTop = log.scrollHeight;
+})();
+</script>
+{% endblock %}

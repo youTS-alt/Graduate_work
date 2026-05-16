@@ -1,0 +1,614 @@
+ЛИСТИНГ КОДА (КЛЮЧЕВЫЕ ФУНКЦИИ И SQL-СКРИПТЫ)
+=============================================
+
+Данный файл содержит листинг ключевых функций серверной части (маршрутизация и основные представления), а также отдельный
+раздел с SQL-скриптами (по одному на каждый типовой сценарий).
+
+
+1) МАРШРУТИЗАЦИЯ (URLCONF)
+-------------------------
+
+Файл: `hotelmate/urls.py`
+
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('', include('ui.urls')),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+Файл: `ui/urls.py`
+
+from django.urls import path
+
+from . import views
+from . import crud
+
+app_name = 'ui'
+
+urlpatterns = [
+    path('', views.dashboard, name='dashboard'),
+    path('system/save-page-screenshot/', views.save_page_screenshot, name='save_page_screenshot'),
+    path('guests/', views.guests_list, name='guests_list'),
+    path('guests/<int:id>/', views.guest_detail, name='guest_detail'),
+    path('bookings/', views.bookings_list, name='bookings_list'),
+    path('bookings/<int:id>/', views.booking_detail, name='booking_detail'),
+    path('tickets/', views.tickets_list, name='tickets_list'),
+    path('tickets/<int:id>/', views.ticket_detail, name='ticket_detail'),
+    path('tasks/', views.tasks_board, name='tasks_board'),
+    path('catalog/', views.catalog, name='catalog'),
+    path('ai/', views.ai_console, name='ai_console'),
+    path('admin-panel/', views.admin_panel, name='admin_panel'),
+    path('admin-panel/data/', crud.crud_index, name='crud_index'),
+    path('admin-panel/data/<slug:slug>/', crud.crud_list, name='crud_list'),
+    path('admin-panel/data/<slug:slug>/create/', crud.crud_create, name='crud_create'),
+    path('admin-panel/data/<slug:slug>/<int:pk>/edit/', crud.crud_update, name='crud_update'),
+    path('admin-panel/data/<slug:slug>/<int:pk>/delete/', crud.crud_delete, name='crud_delete'),
+    path('audit/', views.audit_log, name='audit_log'),
+]
+
+
+2) КЛЮЧЕВЫЕ ФУНКЦИИ СЕРВЕРА (VIEWS)
+----------------------------------
+
+Файл: `ui/views.py` (ключевые функции)
+
+2.1) Базовый контекст
+
+def base_context(active_page: str, title: str, breadcrumbs: list[dict]) -> dict:
+    return {
+        'nav_items': NAV_ITEMS,
+        'active_page': active_page,
+        'page_title': title,
+        'breadcrumbs': breadcrumbs,
+        'notice': 'Запись добавлена в журнал аудита',
+    }
+
+
+2.2) Главная страница
+
+def dashboard(request: HttpRequest) -> HttpResponse:
+    context = base_context('Главная', 'Главная', [{'label': 'Главная'}])
+    context.update({
+        'metrics': [
+            {'label': 'Активные гости', 'value': '1 284', 'delta': '+12% за неделю'},
+            {'label': 'Бронирования сегодня', 'value': '56', 'delta': '12 ожидают подтверждения'},
+            {'label': 'Открытые обращения', 'value': '18', 'delta': '4 с высоким приоритетом'},
+            {'label': 'Задачи в работе', 'value': '23', 'delta': '7 на контроле ИИ'},
+        ],
+        'recommendations': [
+            'Рекомендация: предложить поздний выезд для Анны Смирновой.',
+            'Гость ожидает ответа по трансферу в аэропорт.',
+            'Проверить критические действия в политиках ИИ-консьержа.',
+        ],
+        'recent_bookings': db.Booking.objects.select_related('client').order_by('-created_at', '-id')[:3],
+        'recent_tickets': db.Ticket.objects.select_related('client', 'booking').order_by('-updated_at', '-id')[:3],
+    })
+    return render(request, 'ui/dashboard.html', context)
+
+
+2.3) Карточка гостя (контакты, согласия, лояльность, история активности, связанные сущности)
+
+def guest_detail(request: HttpRequest, id: int) -> HttpResponse:
+    guest = get_object_or_404(
+        db.Client.objects.prefetch_related('contact_channels', 'consents').select_related('loyalty'),
+        pk=id,
+    )
+    context = base_context('Гости', str(guest), [
+        {'label': 'Главная', 'url_name': 'ui:dashboard'},
+        {'label': 'Гости', 'url_name': 'ui:guests_list'},
+        {'label': str(guest)},
+    ])
+
+    booking_ids = list(
+        db.Booking.objects.filter(client=guest).order_by('-created_at', '-id').values_list('id', flat=True)[:50]
+    )
+    ticket_ids = list(
+        db.Ticket.objects.filter(client=guest).order_by('-updated_at', '-id').values_list('id', flat=True)[:50]
+    )
+
+    activity_filter = Q(entity='Client', entity_id=guest.id)
+    if booking_ids:
+        activity_filter |= Q(entity='Booking', entity_id__in=booking_ids)
+    if ticket_ids:
+        activity_filter |= Q(entity='Ticket', entity_id__in=ticket_ids)
+
+    context.update(
+        {
+            'guest': guest,
+            'contact_channels': guest.contact_channels.all().order_by('-is_primary', 'priority', 'id'),
+            'consents': guest.consents.all().order_by('-obtained_at', '-id'),
+            'loyalty': guest.loyalty_record,
+            'guest_bookings': (
+                db.Booking.objects.filter(client=guest)
+                .select_related('category')
+                .order_by('-created_at', '-id')[:20]
+            ),
+            'guest_tickets': (
+                db.Ticket.objects.filter(client=guest)
+                .select_related('booking')
+                .order_by('-updated_at', '-id')[:20]
+            ),
+            'activity_history': (
+                db.AuditLog.objects.filter(activity_filter)
+                .select_related('actor_employee', 'actor_agent')
+                .order_by('-created_at', '-id')[:30]
+            ),
+        }
+    )
+    return render(request, 'ui/guest_detail.html', context)
+
+
+2.4) Детализация бронирования (состав услуг, платежи, история изменений)
+
+def booking_detail(request: HttpRequest, id: int) -> HttpResponse:
+    booking = get_object_or_404(
+        db.Booking.objects.select_related('client', 'category', 'rate', 'room').prefetch_related('guests', 'items', 'payments'),
+        pk=id,
+    )
+    context = base_context('Бронирования', f'#{booking.id}', [
+        {'label': 'Главная', 'url_name': 'ui:dashboard'},
+        {'label': 'Бронирования', 'url_name': 'ui:bookings_list'},
+        {'label': f'#{booking.id}'},
+    ])
+    cancellation = getattr(booking, 'cancellation', None)
+
+    context.update(
+        {
+            'booking': booking,
+            'booking_guests': booking.guests.all().order_by('id'),
+            'booking_items': booking.items.select_related('service', 'offer').all().order_by('id'),
+            'cancellation': cancellation,
+            'payments': booking.payments.all().order_by('-id'),
+            'status_history': db.AuditLog.objects.filter(entity='Booking', entity_id=booking.id).order_by('-created_at')[:20],
+        }
+    )
+    return render(request, 'ui/booking_detail.html', context)
+
+
+2.5) Детализация обращения (сообщения, задачи, панель обработки)
+
+def ticket_detail(request: HttpRequest, id: int) -> HttpResponse:
+    ticket = get_object_or_404(
+        db.Ticket.objects.select_related('client', 'booking').prefetch_related('messages', 'tasks'),
+        pk=id,
+    )
+    context = base_context('Обращения', ticket.subject, [
+        {'label': 'Главная', 'url_name': 'ui:dashboard'},
+        {'label': 'Обращения', 'url_name': 'ui:tickets_list'},
+        {'label': ticket.subject},
+    ])
+
+    last_action_log = db.AgentActionLog.objects.filter(ticket=ticket).order_by('-created_at', '-id').first()
+    summary = ''
+    if last_action_log and isinstance(last_action_log.result, dict):
+        summary = last_action_log.result.get('summary', '') or ''
+
+    context.update(
+        {
+            'ticket': ticket,
+            'messages': ticket.messages.select_related('contact_channel', 'template', 'campaign').all().order_by('created_at', 'id'),
+            'ticket_tasks': ticket.tasks.select_related('department', 'assignee').all().order_by('-created_at', '-id'),
+            'concierge_panels': {'summary': summary, 'reply': '', 'services': [], 'actions': []},
+        }
+    )
+    return render(request, 'ui/ticket_detail.html', context)
+
+
+2.6) Доска задач
+
+def tasks_board(request: HttpRequest) -> HttpResponse:
+    context = base_context('Задачи', 'Задачи', [{'label': 'Главная', 'url_name': 'ui:dashboard'}, {'label': 'Задачи'}])
+    tasks = (
+        db.Task.objects.all()
+        .select_related('department', 'assignee', 'ticket', 'booking')
+        .order_by('-created_at', '-id')
+    )
+    task_columns: dict[str, list[db.Task]] = {'open': [], 'in_progress': [], 'done': [], 'failed': []}
+    for task in tasks:
+        task_columns.setdefault(task.status or 'open', []).append(task)
+
+    context['task_columns'] = task_columns
+    return render(request, 'ui/tasks_board.html', context)
+
+
+3) SQL-СКРИПТЫ (ОТДЕЛЬНО)
+------------------------
+
+Ниже приведены SQL-скрипты, сохраненные в каталоге `docs/sql/` (каждый сценарий — в отдельном файле).
+
+=== docs/sql/01_dashboard_recent.sql ===
+-- Выполнение запроса на выборку последних записей для главной страницы
+-- СУБД: SQLite (Django)
+
+-- 1) Последние бронирования (3 шт.)
+SELECT
+  b.id,
+  (c.last_name || ' ' || c.first_name || CASE WHEN c.middle_name <> '' THEN ' ' || c.middle_name ELSE '' END) AS client_fio,
+  b.check_in,
+  b.check_out,
+  b.status,
+  b.source,
+  b.total_cost,
+  b.created_at
+FROM ui_booking AS b
+JOIN ui_client  AS c ON c.id = b.client_id
+ORDER BY b.created_at DESC, b.id DESC
+LIMIT 3;
+
+-- 2) Последние обращения (3 шт.)
+SELECT
+  t.id,
+  t.subject,
+  t.status,
+  t.priority,
+  (c.last_name || ' ' || c.first_name || CASE WHEN c.middle_name <> '' THEN ' ' || c.middle_name ELSE '' END) AS client_fio,
+  t.booking_id,
+  t.updated_at
+FROM ui_ticket AS t
+JOIN ui_client AS c ON c.id = t.client_id
+ORDER BY t.updated_at DESC, t.id DESC
+LIMIT 3;
+
+
+=== docs/sql/02_guest_card_with_related.sql ===
+-- Выполнение запроса на просмотр карточки гостя с подгрузкой связанных данных
+-- Параметры:
+--   :client_id  -- идентификатор гостя (ui_client.id)
+
+-- 1) Основная карточка гостя
+SELECT
+  c.id,
+  c.last_name,
+  c.first_name,
+  c.middle_name,
+  c.birth_date,
+  c.segment,
+  c.preferences,
+  c.notes,
+  c.created_at,
+  c.updated_at
+FROM ui_client AS c
+WHERE c.id = :client_id;
+
+-- 2) Контактные каналы
+SELECT
+  cc.id,
+  cc.type,
+  cc.value,
+  cc.is_primary,
+  cc.verified_at,
+  cc.priority,
+  cc.created_at,
+  cc.updated_at
+FROM ui_contactchannel AS cc
+WHERE cc.client_id = :client_id
+ORDER BY cc.is_primary DESC, cc.priority ASC, cc.id ASC;
+
+-- 3) Согласия
+SELECT
+  cs.id,
+  cs.type,
+  cs.status,
+  cs.source,
+  cs.obtained_at,
+  cs.revoked_at,
+  cs.created_at
+FROM ui_consent AS cs
+WHERE cs.client_id = :client_id
+ORDER BY cs.obtained_at DESC, cs.id DESC;
+
+-- 4) Лояльность (если есть)
+SELECT
+  l.id,
+  l.level,
+  l.points,
+  l.updated_at
+FROM ui_loyalty AS l
+WHERE l.client_id = :client_id;
+
+-- 5) Связанные бронирования (последние 20)
+SELECT
+  b.id,
+  b.check_in,
+  b.check_out,
+  b.status,
+  b.source,
+  b.total_cost,
+  rc.name AS category_name,
+  r.room_number
+FROM ui_booking AS b
+JOIN ui_roomcategory AS rc ON rc.id = b.category_id
+LEFT JOIN ui_room AS r ON r.id = b.room_id
+WHERE b.client_id = :client_id
+ORDER BY b.created_at DESC, b.id DESC
+LIMIT 20;
+
+-- 6) Связанные обращения (последние 20)
+SELECT
+  t.id,
+  t.subject,
+  t.priority,
+  t.status,
+  t.booking_id,
+  t.updated_at
+FROM ui_ticket AS t
+WHERE t.client_id = :client_id
+ORDER BY t.updated_at DESC, t.id DESC
+LIMIT 20;
+
+
+=== docs/sql/03_booking_detail_full.sql ===
+-- Выполнение запроса на просмотр детализации бронирования с выборкой связанных сущностей
+-- Параметры:
+--   :booking_id -- идентификатор бронирования (ui_booking.id)
+
+-- 1) Заголовок/параметры бронирования
+SELECT
+  b.id,
+  b.check_in,
+  b.check_out,
+  b.status,
+  b.source,
+  b.total_cost,
+  b.created_at,
+  b.updated_at,
+  (c.last_name || ' ' || c.first_name || CASE WHEN c.middle_name <> '' THEN ' ' || c.middle_name ELSE '' END) AS client_fio,
+  rc.name AS category_name,
+  rt.name AS rate_name,
+  r.room_number
+FROM ui_booking AS b
+JOIN ui_client AS c ON c.id = b.client_id
+JOIN ui_roomcategory AS rc ON rc.id = b.category_id
+JOIN ui_rate AS rt ON rt.id = b.rate_id
+LEFT JOIN ui_room AS r ON r.id = b.room_id
+WHERE b.id = :booking_id;
+
+-- 2) Гости в бронировании
+SELECT
+  bg.id,
+  bg.full_name,
+  bg.role,
+  bg.document,
+  bg.created_at
+FROM ui_bookingguest AS bg
+WHERE bg.booking_id = :booking_id
+ORDER BY bg.id ASC;
+
+-- 3) Состав (услуги/пакеты/сборы)
+SELECT
+  bi.id,
+  bi.item_type,
+  bi.quantity,
+  bi.amount,
+  bi.comment,
+  bi.created_at,
+  s.name AS service_name,
+  o.name AS offer_name
+FROM ui_bookingitem AS bi
+LEFT JOIN ui_service AS s ON s.id = bi.service_id
+LEFT JOIN ui_offer AS o ON o.id = bi.offer_id
+WHERE bi.booking_id = :booking_id
+ORDER BY bi.id ASC;
+
+-- 4) Платежи
+SELECT
+  p.id,
+  p.method,
+  p.status,
+  p.amount,
+  p.provider_ref,
+  p.created_at,
+  p.updated_at
+FROM ui_payment AS p
+WHERE p.booking_id = :booking_id
+ORDER BY p.created_at DESC, p.id DESC;
+
+-- 5) История изменений (аудит по бронированию)
+SELECT
+  a.id,
+  a.action,
+  a.risk,
+  a.details,
+  a.created_at,
+  a.actor_employee_id,
+  a.actor_agent_id
+FROM ui_auditlog AS a
+WHERE a.entity = 'Booking' AND a.entity_id = :booking_id
+ORDER BY a.created_at DESC, a.id DESC
+LIMIT 50;
+
+
+=== docs/sql/04_tickets_list_by_recency_and_status.sql ===
+-- Выполнение запроса на выборку списка обращений по актуальности и статусу
+
+SELECT
+  t.id,
+  t.subject,
+  t.priority,
+  t.status,
+  t.booking_id,
+  t.sla_due_at,
+  t.updated_at,
+  (c.last_name || ' ' || c.first_name || CASE WHEN c.middle_name <> '' THEN ' ' || c.middle_name ELSE '' END) AS client_fio
+FROM ui_ticket AS t
+JOIN ui_client AS c ON c.id = t.client_id
+WHERE 1=1
+  -- Пример фильтра по статусам:
+  -- AND t.status IN (:status_1, :status_2)
+ORDER BY t.updated_at DESC, t.id DESC;
+
+
+=== docs/sql/05_ticket_detail_messages_tasks.sql ===
+-- Выполнение запроса на просмотр обращения с выборкой сообщений и связанных задач
+-- Параметры:
+--   :ticket_id -- идентификатор обращения (ui_ticket.id)
+
+-- 1) Карточка обращения
+SELECT
+  t.id,
+  t.subject,
+  t.priority,
+  t.status,
+  t.sla_due_at,
+  t.booking_id,
+  t.created_at,
+  t.updated_at,
+  (c.last_name || ' ' || c.first_name || CASE WHEN c.middle_name <> '' THEN ' ' || c.middle_name ELSE '' END) AS client_fio
+FROM ui_ticket AS t
+JOIN ui_client AS c ON c.id = t.client_id
+WHERE t.id = :ticket_id;
+
+-- 2) Сообщения в обращении (хронологически)
+SELECT
+  m.id,
+  m.channel,
+  m.direction,
+  m.text,
+  m.attachments,
+  m.created_at,
+  m.contact_channel_id,
+  m.template_id,
+  m.campaign_id
+FROM ui_message AS m
+WHERE m.ticket_id = :ticket_id
+ORDER BY m.created_at ASC, m.id ASC;
+
+-- 3) Задачи, связанные с обращением
+SELECT
+  tk.id,
+  tk.type,
+  tk.status,
+  tk.description,
+  tk.due,
+  tk.created_at,
+  tk.updated_at,
+  d.name AS department_name,
+  e.full_name AS assignee_name
+FROM ui_task AS tk
+JOIN ui_department AS d ON d.id = tk.department_id
+LEFT JOIN ui_employee AS e ON e.id = tk.assignee_id
+WHERE tk.ticket_id = :ticket_id
+ORDER BY tk.created_at DESC, tk.id DESC;
+
+
+=== docs/sql/06_tasks_board_by_status.sql ===
+-- Выполнение запроса на формирование доски задач по статусам
+
+SELECT
+  tk.id,
+  tk.type,
+  tk.status,
+  tk.description,
+  tk.due,
+  tk.created_at,
+  d.name AS department_name,
+  e.full_name AS assignee_name,
+  tk.ticket_id,
+  tk.booking_id
+FROM ui_task AS tk
+JOIN ui_department AS d ON d.id = tk.department_id
+LEFT JOIN ui_employee AS e ON e.id = tk.assignee_id
+ORDER BY tk.created_at DESC, tk.id DESC;
+
+SELECT
+  tk.status,
+  COUNT(*) AS cnt
+FROM ui_task AS tk
+GROUP BY tk.status
+ORDER BY cnt DESC;
+
+
+=== docs/sql/07_insert_new_record_via_form.sql ===
+-- Выполнение запроса на добавление новой записи через форму ввода
+
+INSERT INTO ui_client (
+  created_at,
+  updated_at,
+  last_name,
+  first_name,
+  middle_name,
+  birth_date,
+  segment,
+  preferences,
+  notes
+) VALUES (
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP,
+  :last_name,
+  :first_name,
+  COALESCE(:middle_name, ''),
+  :birth_date,
+  COALESCE(:segment, ''),
+  :preferences_json,
+  COALESCE(:notes, '')
+);
+
+SELECT last_insert_rowid() AS new_client_id;
+
+
+=== docs/sql/08_update_existing_record.sql ===
+-- Выполнение запроса на редактирование данных существующей записи
+
+UPDATE ui_ticket
+SET
+  status = :new_status,
+  priority = :new_priority,
+  updated_at = CURRENT_TIMESTAMP
+WHERE id = :ticket_id;
+
+SELECT id, subject, priority, status, updated_at
+FROM ui_ticket
+WHERE id = :ticket_id;
+
+
+=== docs/sql/09_delete_record_with_confirmation.sql ===
+-- Выполнение запроса на удаление записи с подтверждением операции
+
+SELECT id, subject, priority, status, updated_at
+FROM ui_ticket
+WHERE id = :ticket_id;
+
+DELETE FROM ui_message
+WHERE ticket_id = :ticket_id;
+
+DELETE FROM ui_task
+WHERE ticket_id = :ticket_id;
+
+DELETE FROM ui_ticket
+WHERE id = :ticket_id;
+
+
+=== docs/sql/10_search_and_filter_example.sql ===
+-- Выполнение запроса на поиск и фильтрацию информации
+
+SELECT
+  c.id,
+  c.last_name,
+  c.first_name,
+  c.middle_name,
+  c.segment,
+  c.updated_at
+FROM ui_client AS c
+WHERE 1=1
+  AND (
+    c.last_name   LIKE '%' || :q || '%'
+    OR c.first_name  LIKE '%' || :q || '%'
+    OR c.middle_name LIKE '%' || :q || '%'
+  )
+  AND (
+    :segment IS NULL
+    OR :segment = ''
+    OR c.segment = :segment
+  )
+ORDER BY c.updated_at DESC, c.id DESC
+LIMIT :limit OFFSET :offset;
+

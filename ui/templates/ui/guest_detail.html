@@ -1,0 +1,116 @@
+{% extends 'ui/base.html' %}
+{% load translate %}
+
+{% block content %}
+<section class="card hero-card">
+    <div class="profile-head">
+        <div class="avatar">{{ guest.last_name|slice:':1' }}</div>
+        <div>
+            <h3>{{ guest }}</h3>
+            <p>{{ guest.segment|segment|default:"—" }} · {{ guest.birth_date|date:"d.m.Y"|default:"—" }}</p>
+            <div class="badge-row">
+                {% if loyalty_level %}<span class="badge badge-sea">{{ loyalty_level }} ({{ loyalty_points }})</span>{% endif %}
+                {% if guest.preferences %}<span class="badge badge-sunset">preferences</span>{% endif %}
+            </div>
+        </div>
+        <div class="button-row profile-actions">
+            <a class="btn btn-secondary" href="{% url 'ui:crud_create' 'messages' %}">Сообщение</a>
+            <a class="btn btn-primary" href="{% url 'ui:crud_create' 'bookings' %}">Создать бронирование</a>
+        </div>
+    </div>
+</section>
+
+<section class="card">
+    <div class="tabs" data-tabs>
+        <div class="tab-buttons">
+            <button class="tab-button active" type="button" data-tab-target="contacts">Контакты</button>
+            <button class="tab-button" type="button" data-tab-target="consents">Согласия</button>
+            <button class="tab-button" type="button" data-tab-target="loyalty">Лояльность</button>
+            <button class="tab-button" type="button" data-tab-target="bookings">Бронирования</button>
+            <button class="tab-button" type="button" data-tab-target="tickets">Обращения</button>
+            <button class="tab-button" type="button" data-tab-target="history">История действий</button>
+        </div>
+        <div class="tab-panel active" data-tab-panel="contacts">
+            <div class="split-grid">
+                {% for channel in contact_channels %}
+                    <div class="info-card soft-accent">
+                        <p class="eyebrow">{{ channel.type }}</p>
+                        <strong>{{ channel.value }}</strong>
+                        <p>{% if channel.is_primary %}Основной канал{% else %}Дополнительный канал{% endif %}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="consents">
+            <div class="stack-list">
+                {% for consent in consents %}
+                    <div class="list-row">
+                        <div>
+                            <strong>{{ consent.type }}</strong>
+                            <p>Получено: {{ consent.obtained_at|date:"d.m.Y H:i" }}</p>
+                        </div>
+                        <span class="badge badge-sea">{{ consent.status }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="loyalty">
+            <div class="split-grid">
+                <div class="info-card">
+                    <p class="eyebrow">Уровень</p>
+                    <strong>{% if loyalty_level %}{{ loyalty_level }}{% else %}—{% endif %}</strong>
+                </div>
+                <div class="info-card">
+                    <p class="eyebrow">Баллы</p>
+                    <strong>{% if loyalty_level %}{{ loyalty_points }}{% else %}—{% endif %}</strong>
+                </div>
+                <div class="info-card">
+                    <p class="eyebrow">Привилегии</p>
+                    <strong>—</strong>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="bookings">
+            <div class="table-list">
+                {% for booking in guest_bookings %}
+                    <a class="table-row" href="{% url 'ui:booking_detail' booking.id %}">
+                        <span>#{{ booking.id }}</span>
+                        <span>{{ booking.check_in|date:"d.m.Y" }} — {{ booking.check_out|date:"d.m.Y" }}</span>
+                        <span>{{ booking.category }}</span>
+                        <span class="badge status-booking-{{ booking.status|slugify }}">{{ booking.status|booking_status }}</span>
+                    </a>
+                {% empty %}
+                    <p class="empty-state">У гостя пока нет бронирований.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="tickets">
+            <div class="table-list">
+                {% for ticket in guest_tickets %}
+                    <a class="table-row" href="{% url 'ui:ticket_detail' ticket.id %}">
+                        <span>#{{ ticket.id }}</span>
+                        <span>{{ ticket.subject }}</span>
+                        <span>{{ ticket.priority|priority }}</span>
+                        <span class="badge status-ticket-{{ ticket.status|slugify }}">{{ ticket.status|ticket_status }}</span>
+                    </a>
+                {% empty %}
+                    <p class="empty-state">По гостю пока нет обращений.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="history">
+            <div class="timeline-list">
+                {% for item in activity_history %}
+                    <div class="timeline-item">
+                        <span class="timeline-dot"></span>
+                        <div>
+                            <strong>{{ item.entity }} #{{ item.entity_id }} — {{ item.action }}</strong>
+                            <p>{{ item.created_at|date:"d.m.Y H:i" }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

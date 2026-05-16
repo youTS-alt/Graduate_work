@@ -1,0 +1,18 @@
+{% extends 'ui/base.html' %}
+
+{% block content %}
+<section class="card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">DATA</p>
+            <h3>Справочники и таблицы</h3>
+        </div>
+    </div>
+    <div class="badge-row wrap-gap">
+        {% for item in items %}
+            <a class="badge badge-sea" href="{% url 'ui:crud_list' item.slug %}">{{ item.title }}</a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+

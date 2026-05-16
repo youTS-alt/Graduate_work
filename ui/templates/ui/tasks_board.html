@@ -1,0 +1,30 @@
+{% extends 'ui/base.html' %}
+{% load translate %}
+
+{% block content %}
+<section class="kanban-grid">
+    {% for column, items in task_columns.items %}
+        <article class="card kanban-column">
+            <div class="section-head">
+                <h3>{{ column|task_status }}</h3>
+                <span class="badge badge-sky">{{ items|length }}</span>
+            </div>
+            <div class="kanban-stack">
+                {% for task in items %}
+                    <div class="kanban-card">
+                        <span class="badge status-task-{{ column|slugify }}">{{ column|task_status }}</span>
+                        <strong>{{ task.type }}</strong>
+                        <p>{{ task.department }}{% if task.assignee %} · {{ task.assignee }}{% endif %}</p>
+                        <div class="card-meta">
+                            <span>{% if task.ticket %}#{{ task.ticket.id }}{% elif task.booking %}#{{ task.booking.id }}{% else %}—{% endif %}</span>
+                            <span>{{ task.due|date:"d.m H:i"|default:"—" }}</span>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="empty-state">Нет задач в этой колонке.</p>
+                {% endfor %}
+            </div>
+        </article>
+    {% endfor %}
+</section>
+{% endblock %}

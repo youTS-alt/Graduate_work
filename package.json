@@ -1,0 +1,26 @@
+{
+  "name": "hotelmate_ai_crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyf2021/HotelMate_AI_CRM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zyf2021/HotelMate_AI_CRM/issues"
+  },
+  "homepage": "https://github.com/zyf2021/HotelMate_AI_CRM#readme",
+  "description": "",
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  }
+}
