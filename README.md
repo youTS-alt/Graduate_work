@@ -157,7 +157,11 @@ python manage.py seed_data --reset
 python manage.py runserver
 ```
 
+<img width="883" height="234" alt="image" src="https://github.com/user-attachments/assets/f2422a46-d538-4c5d-8dcf-9fe15cddccf1" />
+
 После запуска откройте в браузере *http://127.0.0.1:8000/*
+
+<img width="1033" height="781" alt="image" src="https://github.com/user-attachments/assets/23372d63-88e5-4bd4-a183-4f8bc6f41b43" />
 
 Основные страницы:
 
@@ -165,6 +169,8 @@ python manage.py runserver
 - AI-консоль: *http://127.0.0.1:8000/ai/*
 - Обращения: *http://127.0.0.1:8000/tickets/*
 - Бронирования: *http://127.0.0.1:8000/bookings/*
+
+Проверка работоспособности модели
 
 После выполения всех этих действий вы сможете запускать данный проект через кнопку. Для этого выполните действия, показанные на рисунке ниже:
 
