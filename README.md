@@ -187,6 +187,26 @@ python manage.py runserver
 
 Если сайт после этих действий не запустится, просто попробуйте еще раз, и все получится.
 
+## Быстрый сценарий запуска
+
+Если всё уже установлено, достаточно выполнить либо в терминале `PowerShell`, либо в `VS Code`:
+
+```
+.venv\Scripts\Activate.ps1
+```
+
+```
+pip install -r requirements.txt
+```
+
+```
+ollama pull llama3.1:8b
+```
+
+```
+python manage.py runserver
+```
+
 Базу данных можно посмотреть в программе `DB Browser (SQLite)`, для этого перейдите по ссылке *https://sqlitebrowser.org/dl/*. Установите, откройте и выберите базу данных по пути: `C:/Users/Test/Desktop/HotelMate_AI_CRM-master/db.sqlite3`
 
 ## Если AI-чат не отвечает
