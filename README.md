@@ -34,9 +34,9 @@
 
 ## Предустановленное ПО
 
-1. `Git` для клонирования проекта.
-2. `Python 3.11+`.
-3. `VS Code`.
+1. `Git` для клонирования проекта (*https://git-scm.com/install/*)
+2. `Python 3.11+`. (*https://www.python.org/downloads/*)
+3. `VS Code`. (*https://code.visualstudio.com/download*)
 4. Расширения `Python` и `Pylance` в `VS Code`.
 <img width="395" height="377" alt="Расширения `Python` и `Pylance` " src="https://github.com/user-attachments/assets/da0422ec-c052-416c-aa4c-680013cb9b9d" />
 
