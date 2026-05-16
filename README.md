@@ -117,8 +117,6 @@ ollama pull llama3.1:8b
 ```
 <img width="869" height="267" alt="image" src="https://github.com/user-attachments/assets/456d2930-27d3-4e48-a986-8dea06f88e95" />
 
-
-
 **9. Запустить Ollama.** Обычно на Windows Ollama стартует как приложение и поднимает локальный сервер автоматически. Проверить можно так, выполнив команду в `PowerShell:
 
 ```
@@ -130,8 +128,8 @@ ollama list
 ```
 Invoke-RestMethod -Method Get -Uri http://localhost:11434/api/tags
 ```
-<img width="862" height="261" alt="image" src="https://github.com/user-attachments/assets/18e7678c-2587-455f-aae8-34f35b84d25d" />
 
+<img width="862" height="261" alt="image" src="https://github.com/user-attachments/assets/18e7678c-2587-455f-aae8-34f35b84d25d" />
 
 **10. Подготовить базу данных.** В репозитории уже есть файл `db.sqlite3`, поэтому для быстрого старта можно просто запускать проект.
 
@@ -170,7 +168,9 @@ python manage.py runserver
 - Обращения: *http://127.0.0.1:8000/tickets/*
 - Бронирования: *http://127.0.0.1:8000/bookings/*
 
-Проверка работоспособности модели
+Проверка работоспособности модели:
+
+<img width="1047" height="807" alt="image" src="https://github.com/user-attachments/assets/2dde812f-4361-4a2b-b710-80fa14a80259" />
 
 После выполения всех этих действий вы сможете запускать данный проект через кнопку. Для этого выполните действия, показанные на рисунке ниже:
 
@@ -188,7 +188,7 @@ python manage.py runserver
 4. Скачана ли модель `llama3.1:8b`.
 5. Доступен ли адрес *http://localhost:11434*.
 
-В проекте запрос к Ollama зашит в [ui/agent.py](C:/Users/Ary/PycharmProjects/HotelMate_AI_CRM/ui/agent.py):
+В проекте запрос к Ollama зашит в [ui/agent.py](C:/Users/Test/Desktop/HotelMate_AI_CRM-master/ui/agent.py):
 
 - `OLLAMA_URL = "http://localhost:11434/api/chat"`
 - `OLLAMA_MODEL = "llama3.1:8b"`
