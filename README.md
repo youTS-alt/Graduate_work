@@ -8,7 +8,7 @@
 
 ## Важная информация
 
-Если у вас на устройстве включен VPN, то Ollama не будет работать.
+Если у вас на устройстве включен VPN, то Ollama не будет работать. Работоспособность информационной системы была проверена на ВМ Oracle VirtualBox на ОС Windows 10 Pro (64-bit), и, соответственно, действия будут описываться с нее. Системные требования будут указаны ниже. Вы же можете выполнить установку на любой другой ВМ/другом устройстве.
 
 ## Системные требования
 
@@ -17,21 +17,18 @@
 | Компонент  | Значение |
 | ------------- | ------------- |
 | Операционная система  | Windows 10 PRO (64-bit) версия 21H2 или новее  |
-| Процессор  | Intel Core i5 (10-го поколения) / AMD Ryzen 5 5600 (6 физических ядер, поддержка AVX2)  |
-| Оперативная память RAM  | 16 ГБ  |
-| Видеокарта  | Не требуется (работа на процессоре)  |
-| Свободное место на диске  | 20 ГБ (SSD)  |
-
-### Рекомендуемые
-| Компонент  | Значение |
-| ------------- | ------------- |
-| Операционная система  | 11 Pro (22H2+)  |
-| Процессор  | Intel Core i7 (12–14 поколение) / AMD Ryzen 7 7700+ 8+ ядер, AVX512 (приветствуется)  |
-| Оперативная память RAM  | 16-32 ГБ  |
-| Видеокарта  | GTX 1060 6GB и выше. Рекомендуется RTX 3060 8GB  |
+| Количество ядер CPU  | 4  |
+| Оперативная память RAM  | 8 ГБ  |
 | Свободное место на диске  | 50 ГБ (SSD)  |
 
-**Данный проект был разработан на ОС Windows 10 PRO (64-bit) с CPU - i7-12650H, GPU - RTX 4060 8GB, RAM - 16 GB**
+### Рекомендуемые
+
+| Компонент  | Значение |
+| ------------- | ------------- |
+| Операционная система  | Windows 10 PRO (64-bit) версия 21H2 или новее  |
+| Количество ядер CPU  | 6-8  |
+| Оперативная память RAM  | Не меньше 10 ГБ  |
+| Свободное место на диске  | 50 ГБ (SSD)  |
 
 ## Предустановленное ПО
 
@@ -51,9 +48,12 @@
 
 **3. Откройте папку проекта `HotelMate_AI_CRM`.**
 
-**4. Откройте встроенный терминал: `Terminal -> New Terminal`.**
+**4. Откройте терминал `PowerShell` и войдите в папку с проектом.**
 
-**5. В терминале `VS Code`** поочередно выполните: 
+<img width="881" height="162" alt="image" src="https://github.com/user-attachments/assets/2f3ecb8d-fbca-41e9-afbd-aaf363c65dd2" />
+
+
+**5. В терминале `PowerShell`** поочередно выполните: 
 ```
 python -m venv .venv
 ```
@@ -61,9 +61,27 @@ python -m venv .venv
 ```
 .venv\Scripts\Activate.ps1
 ```
+
 При успешном выполнении у вас появится скобка зеленого цвета (.venv) в начале строки ввода в терминал
 
+<img width="877" height="174" alt="image" src="https://github.com/user-attachments/assets/57ba4a30-ce11-4b0e-8a6c-a22e3c351d2e" />
+
+Если PowerShell запрещает запуск скриптов, временно разрешите их для текущего пользователя:
+
+```
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+<img width="876" height="253" alt="image" src="https://github.com/user-attachments/assets/71d47a9e-df7c-42c9-9331-575c5f1399f8" />
+
+После этого действия снова выполните:
+
+```
+.venv\Scripts\Activate.ps1
+```
+
 **6. Установите зависимости проекта,** выполнив команды поочередно:
+
 ```
 python -m pip install --upgrade pip
 ```
@@ -71,6 +89,8 @@ python -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+
+<img width="862" height="262" alt="image" src="https://github.com/user-attachments/assets/bb1ab705-1fa3-4111-9fd8-5cc040434b93" />
 
 В проекте для AI-чата используется пакет `httpx`, поэтому он добавлен в `requirements.txt` и установится вместе с Django.
 
@@ -85,19 +105,22 @@ pip install -r requirements.txt
 ollama --version
 ```
 
-**8. Скачайте модель для Ollama** в терминале `PowerShell`
+![Uploading image.png…]()
+
+
+**8. Скачайте модель для Ollama** в старм терминале `PowerShell`
 Проект сейчас ожидает модель *llama3.1:8b*, скачайте ее командой:
 ```
 ollama pull llama3.1:8b
 ```
-<img width="859" height="266" alt="Screenshot_9" src="https://github.com/user-attachments/assets/f4c4d087-387a-4ea1-a4d6-a602eec8892d" />
+![Uploading image.png…]()
+
 
 **9. Запустить Ollama.** Обычно на Windows Ollama стартует как приложение и поднимает локальный сервер автоматически. Проверить можно так, выполнив команду в `PowerShell:
 
 ```
 ollama list
 ```
-<img width="857" height="180" alt="Screenshot_10" src="https://github.com/user-attachments/assets/8fa7f4c7-4070-4ac0-a630-baff1b2af373" />
 
 Если нужно вручную проверить API:
 
@@ -105,7 +128,8 @@ ollama list
 Invoke-RestMethod -Method Get -Uri http://localhost:11434/api/tags
 ```
 
-<img width="876" height="233" alt="image" src="https://github.com/user-attachments/assets/de910025-698c-41f2-b5f3-230b2a6952e1" />
+![Uploading image.png…]()
+
 
 **10. Подготовить базу данных.** В репозитории уже есть файл `db.sqlite3`, поэтому для быстрого старта можно просто запускать проект.
 
