@@ -35,12 +35,17 @@
 ## Предустановленное ПО
 
 1. `Git` для клонирования проекта (*https://git-scm.com/install/*)
-2. `Python 3.11+`. (*https://www.python.org/downloads/*)
-3. `VS Code`. (*https://code.visualstudio.com/download*)
-4. Расширения `Python` и `Pylance` в `VS Code`.
+
+2. Архиватор `WinRAR` (*https://winrarload.com/?etext=2202.c_vAB02FcY2RXNKgIZNddiXu35xGbHMiShHsyl5WdXs-TDDq8nnZmzcH5KCZ6FK5bWh2YWdzemt4dWZteG50aA.54f426060e08f83da3be994b2f46ca85d371b732&yclid=4348760131981279231*)
+
+3. `Python 3.11+`. (*https://www.python.org/downloads/*)
+
+4. `VS Code`. (*https://code.visualstudio.com/download*)
+
+5. Расширения `Python` и `Pylance` в `VS Code`.
 <img width="395" height="377" alt="Расширения `Python` и `Pylance` " src="https://github.com/user-attachments/assets/da0422ec-c052-416c-aa4c-680013cb9b9d" />
 
-5. `Ollama`, потому что AI-чат проекта ходит в локальный API `http://localhost:11434/api/chat`.
+6. `Ollama`, потому что AI-чат проекта ходит в локальный API `http://localhost:11434/api/chat`.
 <img width="390" height="148" alt="image" src="https://github.com/user-attachments/assets/15a33662-896d-45f6-a7fc-8bb7b3cf914a" />
 
 # Установка
