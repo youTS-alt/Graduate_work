@@ -157,10 +157,7 @@ python manage.py seed_data --reset
 python manage.py runserver
 ```
 
-
 После запуска откройте в браузере *http://127.0.0.1:8000/*
-
-
 
 Основные страницы:
 
