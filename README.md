@@ -192,7 +192,7 @@ python manage.py runserver
 4. Скачана ли модель `llama3.1:8b`.
 5. Доступен ли адрес *http://localhost:11434*.
 
-В проекте запрос к Ollama зашит в [ui/agent.py](C:/Users/Test/Desktop/HotelMate_AI_CRM-master/ui/agent.py):
+В проекте запрос к Ollama зашит в [ui/agent.py] (C:/Users/Test/Desktop/HotelMate_AI_CRM-master/ui/agent.py):
 
 - `OLLAMA_URL = "http://localhost:11434/api/chat"`
 - `OLLAMA_MODEL = "llama3.1:8b"`
