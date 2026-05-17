@@ -73,7 +73,7 @@ python -m venv .venv
 
 <img width="877" height="174" alt="image" src="https://github.com/user-attachments/assets/57ba4a30-ce11-4b0e-8a6c-a22e3c351d2e" />
 
-Если PowerShell запрещает запуск скриптов, временно разрешите их для текущего пользователя:
+Если PowerShell запрещает запуск скриптов, временно разрешите их для текущего пользователя/для всех:
 
 ```
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
@@ -117,7 +117,7 @@ ollama --version
 
 
 
-**8. Скачайте модель для Ollama** в старм терминале `PowerShell`
+**8. Скачайте модель для Ollama** в старом терминале `PowerShell`.
 Проект сейчас ожидает модель *llama3.1:8b*, скачайте ее командой:
 ```
 ollama pull llama3.1:8b
